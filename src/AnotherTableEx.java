@@ -5,7 +5,7 @@ class AnotherTableEx extends JFrame
 {
     public AnotherTableEx()
     {
-        final TransparentJTable table = new TransparentJTable(new MyTableModel());
+        JTable table = new JTable();
         table.setRowSelectionAllowed(true);
         table.setColumnSelectionAllowed(true);
         table.getTableHeader().setReorderingAllowed(false);
