@@ -6,7 +6,7 @@ import java.util.List;
 
 class Day {
     private DayType dayType;
-    private List<TwoHourClass> twoHourClasses;
+    List<TwoHourClass> twoHourClasses;
     Day(Element e) throws Exception {
         dayType = Parser.getDayType(Parser.getTextValue(e,"id"));
         System.out.println(dayType);
@@ -22,7 +22,17 @@ class Day {
     public DayType getDayType() {
         return dayType;
     }
-
+    String[][] getData() {
+        String[][] Data = new String[twoHourClasses.size() + 1][4];
+        Data[0][0] = "==";
+        for (int j = 1; j < 4; j++) {
+            Data[0][j] = "============================";
+        }
+        for (int j = 0; j < twoHourClasses.size(); j++) {
+            Data[j + 1][0] = Integer.valueOf(j + 1).toString();
+        }
+        return Data;
+    }
     public void setDayType(DayType dayType) {
         this.dayType = dayType;
     }

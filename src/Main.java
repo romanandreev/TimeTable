@@ -7,7 +7,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main {
     Document doc;
@@ -29,12 +28,12 @@ public class Main {
         parseDoc();
     }
 
-    private void parseDoc() throws Exception {
+    void parseDoc() throws Exception {
         NodeList nl = doc.getElementsByTagName("timetable");
         if(nl != null && nl.getLength() > 0) {
             for(int i = 0 ; i < nl.getLength();i++) {
                 Timetable tt = new Timetable((Element)nl.item(i));
-                Timetable.show();
+                tt.show();
             }
         }
     }
