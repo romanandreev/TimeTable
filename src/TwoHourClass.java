@@ -22,7 +22,18 @@ class TwoHourClass {
     public Integer getIndex() {
         return index;
     }
-
+    String[][] getData() {
+        String[][] Data = new String[1][3];
+        for (int i = 0; i < lessons.size(); i++) {
+            String[][] NData = lessons.get(i).getData();
+            for (int j = 0; j < NData[0].length; j++) {
+                if (NData[0][j].length() > 0) {
+                    Data[0][j] = NData[0][j];
+                }
+            }
+        }
+        return Data;
+    }
     public void setIndex(Integer index) {
         this.index = index;
     }

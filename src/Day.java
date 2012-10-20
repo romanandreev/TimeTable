@@ -29,8 +29,13 @@ class Day {
             Data[0][j] = "============================";
         }
         for (int j = 0; j < twoHourClasses.size(); j++) {
+            String[][] DataTHC = twoHourClasses.get(j).getData();
             Data[j + 1][0] = Integer.valueOf(j + 1).toString();
+            for (int k = 0; k < DataTHC[0].length; k++) {
+                Data[j + 1][k + 1] = DataTHC[0][k];
+            }
         }
+
         return Data;
     }
     public void setDayType(DayType dayType) {
