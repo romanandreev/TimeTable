@@ -1,27 +1,21 @@
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(name="weekday")
 class Day {
     private DayType dayType;
-    List<TwoHourClass> twoHourClasses;
-    Day(Element e) throws Exception {
-        dayType = Parser.getDayType(Parser.getTextValue(e,"id"));
-        System.out.println(dayType);
-        NodeList nl = e.getElementsByTagName("two_hours");
-        twoHourClasses = new ArrayList<TwoHourClass>();
-        if(nl != null && nl.getLength() > 0) {
-            for(int i = 0 ; i < nl.getLength();i++) {
-                twoHourClasses.add(new TwoHourClass((Element) nl.item(i)));
-            }
-        }
-    }
+    private List<TwoHourClass> twoHourClasses;
 
     public DayType getDayType() {
         return dayType;
     }
+
     String[][] getData() {
         String[][] Data = new String[twoHourClasses.size() + 1][4];
         Data[0][0] = "";
@@ -42,11 +36,17 @@ class Day {
 
         return Data;
     }
+
+    @XmlAttribute(name="id")
     public void setDayType(DayType dayType) {
         this.dayType = dayType;
     }
 
+    @XmlElement(name="two_hours")
     public List<TwoHourClass> getTwoHourClasses() {
+        if (twoHourClasses == null) {
+            twoHourClasses = new ArrayList<TwoHourClass>();
+        }
         return twoHourClasses;
     }
 
@@ -54,8 +54,15 @@ class Day {
         this.twoHourClasses = twoHourClasses;
     }
 
+    @XmlType
+    @XmlEnum(String.class)
     static enum DayType {
-        MONDAY, TUESDAY, WEDNESDAY,
-        THURSDAY, FRIDAY, SATURDAY, SUNDAY
+        @XmlEnumValue("mon") MONDAY, 
+        @XmlEnumValue("tue") TUESDAY, 
+        @XmlEnumValue("wed") WEDNESDAY,
+        @XmlEnumValue("thu") THURSDAY, 
+        @XmlEnumValue("fri") FRIDAY, 
+        @XmlEnumValue("sat") SATURDAY, 
+        @XmlEnumValue("sun") SUNDAY
     }
 }

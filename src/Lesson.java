@@ -1,30 +1,35 @@
-import org.w3c.dom.Element;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
 
+@XmlType(name="lesson")
 class Lesson {
     private String location;
     private String specialty;
-    private String name;
-    private String prof;
+
+    @XmlElement(name="course")
+    private Course course;
 
     private Integer specialtyMask;
     private LessonType type;
-    Lesson(Element e) throws Exception {
-        location = Parser.getTextValue(e,"location");
-        specialty = Parser.getTextValue(e,"spec");
-        name = Parser.getTextValue(e,"name");
-        prof = Parser.getTextValue(e,"prof");
-        specialtyMask = Parser.getMask(specialty);
-        System.out.println(location + " " + specialty + " " + name + " " + prof);
-    }
 
+    /*
+     * Аудитория
+     */
     public String getLocation() {
         return location;
     }
 
+    @XmlElement(name="location")
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /*
+     * Специализация ("all", "sm", "mm", или "sa")
+     */
     public String getSpecialty() {
         return specialty;
     }
@@ -36,7 +41,8 @@ class Lesson {
                 if (specialtyMask == 7 && i > 0) {
                     Data[0][i] = "<---";
                 } else {
-                    Data[0][i] = name + " | " + prof + " | " + location;
+                    Data[0][i] = getCourse().getName() + " | " + 
+                                 getCourse().getProf() + " | " + location;
                 }
             } else {
                 Data[0][i] = "";
@@ -45,10 +51,23 @@ class Lesson {
         return Data;
     }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
+    private Integer getMask(String s) {
+        if (s.equals("all")) return 1 + 2 + 4;
+        if (s.equals("sa")) return 1;
+        if (s.equals("sm")) return 2;
+        if (s.equals("mm")) return 4;
+        return 0;
     }
 
+    @XmlAttribute(name="spec")
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
+        specialtyMask = getMask(specialty);
+    }
+
+    /*
+     * Тип занятия (кафедральное или семинар)
+     */
     public LessonType getType() {
         return type;
     }
@@ -57,7 +76,17 @@ class Lesson {
         this.type = type;
     }
 
-    static class LessonType {
+    /*
+     * Курс, к которому относится данное занятие 
+     */
+    public Course getCourse() {
+        return course;
+    }
 
+    @XmlType
+    @XmlEnum(String.class)
+    static enum LessonType {
+        @XmlEnumValue("chair") CHAIR,
+        @XmlEnumValue("dep") DEPARTMENT
     }
 }

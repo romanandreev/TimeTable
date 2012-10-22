@@ -1,46 +1,37 @@
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="timetable")
 class Timetable {
+
     private Integer year;
     private Integer semester;
-    List<Day> days;
-
-    Timetable(Element e) throws Exception {
-        year = Parser.getIntValue(e, "year");
-        semester = Parser.getIntValue(e, "semester");
-        NodeList nl = e.getElementsByTagName("weekday");
-        days = new ArrayList<Day>();
-        if (nl != null && nl.getLength() > 0) {
-            for (int i = 0; i < nl.getLength(); i++) {
-                days.add(new Day((Element) nl.item(i)));
-            }
-        }
-    }
+    private List<Day> days;
 
     String[][] getData() {
         int n = 1;
-        for (int i = 0; i < days.size(); i++) {
-            n += days.get(i).twoHourClasses.size() + 1;
+        for (Day weekday : getDays()) {
+            n += weekday.getTwoHourClasses().size() + 1;
         }
-        String[][] Data = new String[n][4];
-        Data[0][1] = "sa";
-        Data[0][2] = "sm";
-        Data[0][3] = "mm";
+        String[][] data = new String[n][4];
+        data[0][1] = "sa";
+        data[0][2] = "sm";
+        data[0][3] = "mm";
         int tk = 1;
-        for (int i = 0; i < days.size(); i++) {
-            String[][] dayData = days.get(i).getData();
+        for (Day day : getDays()) {
+            String[][] dayData = day.getData();
             for (int j = 0; j < dayData.length; j++) {
                 for (int k = 0; k < dayData[j].length; k++) {
-                    Data[j + tk][k] = dayData[j][k];
+                    data[j + tk][k] = dayData[j][k];
                 }
             }
-            tk += days.get(i).twoHourClasses.size() + 1;
+            tk += day.getTwoHourClasses().size() + 1;
         }
-        return Data;
+        return data;
     }
 
     void show() {
@@ -51,6 +42,7 @@ class Timetable {
         return year;
     }
 
+    @XmlAttribute(name="year")
     public void setYear(Integer year) {
         this.year = year;
     }
@@ -59,11 +51,16 @@ class Timetable {
         return semester;
     }
 
+    @XmlAttribute(name="semester")
     public void setSemester(Integer semester) {
         this.semester = semester;
     }
 
+    @XmlElement(name="weekday")
     public List<Day> getDays() {
+        if (days == null) {
+            days = new ArrayList<Day>();
+        }
         return days;
     }
 

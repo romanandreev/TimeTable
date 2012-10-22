@@ -1,31 +1,31 @@
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(name="two_hours")
 class TwoHourClass {
     private Integer index;
     private List<Lesson> lessons;
-    TwoHourClass(Element e) throws Exception {
-        index = Parser.getIntValue(e,"no");
-        System.out.println(index);
-        NodeList nl = e.getElementsByTagName("lesson");
-        lessons = new ArrayList<Lesson>();
-        if(nl != null && nl.getLength() > 0) {
-            for(int i = 0 ; i < nl.getLength();i++) {
-                lessons.add(new Lesson((Element) nl.item(i)));
-            }
-        }
-    }
 
+    /*
+     * Номер пары.
+     */
     public Integer getIndex() {
         return index;
     }
+
+    @XmlAttribute(name="no")
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+
     String[][] getData() {
         String[][] Data = new String[1][3];
-        for (int i = 0; i < lessons.size(); i++) {
-            String[][] NData = lessons.get(i).getData();
+        for (Lesson lesson : getLessons()) {
+            String[][] NData = lesson.getData();
             for (int j = 0; j < NData[0].length; j++) {
                 if (NData[0][j].length() > 0) {
                     Data[0][j] = NData[0][j];
@@ -34,11 +34,15 @@ class TwoHourClass {
         }
         return Data;
     }
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
 
+    /*
+     * Занятия на данной паре у разных специализаций.
+     */
+    @XmlElement(name="lesson")
     public List<Lesson> getLessons() {
+        if (lessons == null) {
+            lessons = new ArrayList<Lesson>();
+        }
         return lessons;
     }
 
