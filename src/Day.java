@@ -7,11 +7,13 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
+/** Расписание на день недели */
 @XmlType(name="weekday")
 class Day {
     private DayType dayType;
     private List<TwoHourClass> twoHourClasses;
 
+    /** День недели */
     public DayType getDayType() {
         return dayType;
     }
@@ -42,6 +44,7 @@ class Day {
         this.dayType = dayType;
     }
 
+    /** Пары в этот день */
     @XmlElement(name="two_hours")
     public List<TwoHourClass> getTwoHourClasses() {
         if (twoHourClasses == null) {

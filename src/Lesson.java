@@ -4,6 +4,9 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+/** 
+ * Занятие у конкретной специализации
+ */
 @XmlType(name="lesson")
 class Lesson {
     private String location;
@@ -15,8 +18,8 @@ class Lesson {
     private Integer specialtyMask;
     private LessonType type;
 
-    /*
-     * Аудитория
+    /**
+     * Аудитория, в которой проходит занятие
      */
     public String getLocation() {
         return location;
@@ -27,7 +30,7 @@ class Lesson {
         this.location = location;
     }
 
-    /*
+    /**
      * Специализация ("all", "sm", "mm", или "sa")
      */
     public String getSpecialty() {
@@ -65,7 +68,7 @@ class Lesson {
         specialtyMask = getMask(specialty);
     }
 
-    /*
+    /**
      * Тип занятия (кафедральное или семинар)
      */
     public LessonType getType() {
@@ -76,7 +79,7 @@ class Lesson {
         this.type = type;
     }
 
-    /*
+    /**
      * Курс, к которому относится данное занятие 
      */
     public Course getCourse() {

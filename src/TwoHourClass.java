@@ -5,13 +5,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+/** Пара */
 @XmlType(name="two_hours")
 class TwoHourClass {
     private Integer index;
     private List<Lesson> lessons;
 
-    /*
-     * Номер пары.
+    /**
+     * Номер пары
      */
     public Integer getIndex() {
         return index;
@@ -35,7 +36,7 @@ class TwoHourClass {
         return Data;
     }
 
-    /*
+    /**
      * Занятия на данной паре у разных специализаций.
      */
     @XmlElement(name="lesson")

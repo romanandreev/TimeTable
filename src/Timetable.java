@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/** Расписание на семестр */
 @XmlRootElement(name="timetable")
 class Timetable {
 
@@ -34,10 +35,12 @@ class Timetable {
         return data;
     }
 
+    /** Отобразить расписание */
     void show() {
         RowHeaderTable tb = new RowHeaderTable(getData());
     }
 
+    /** Год */
     public Integer getYear() {
         return year;
     }
@@ -47,6 +50,7 @@ class Timetable {
         this.year = year;
     }
 
+    /** Номер семестра */
     public Integer getSemester() {
         return semester;
     }
@@ -56,6 +60,9 @@ class Timetable {
         this.semester = semester;
     }
 
+    /**
+     * Список расписаний по дням недели
+     */
     @XmlElement(name="weekday")
     public List<Day> getDays() {
         if (days == null) {
