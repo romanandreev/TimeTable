@@ -1,92 +1,34 @@
+/*
+ * (swing1.1beta3)
+ * 
+ */
+
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.Enumeration;
-import java.util.Vector;
 
 
-public class RowHeaderTable extends MultiSpanCellTable {
-    RowHeaderTable(String[][] Data) {
-        DefaultTableModel headerData = new DefaultTableModel(0, 1);
-        MyTableModel data = new MyTableModel(0, Data[0].length - 1);
+/**
+ * @version 1.0 11/26/98
+ */
 
-        for (int i = 1; i < Data.length; i++) {
-            headerData.addRow(new Object[]{Data[i][0]});
+public class MultiSpanCellTable extends JTable {
 
-            Vector v = new Vector();
-
-            for (int j = 1; j < Data[i].length; j++)
-                v.add(Data[i][j]);
-
-            data.addRow(v);
-        }
-        //data.cellAtt.combine(new int[]{3}, new int[]{0, 1, 2});
-
-        JTable table = new JTable(data);
-
-        table.setUI(new MultiSpanCellTableUI());
-        for (int i = 1; i < Data[0].length; i++) {
-            table.getColumnModel().getColumn(i - 1).setHeaderValue(Data[0][i]);
-        }
-        //AttributiveCellTableModel ml = new AttributiveCellTableModel(10,6);
-        //CellSpan cellAtt =(CellSpan)ml.getCellAttribute();
-        for (int i = 0; i < Data.length; i++) {
-            for (int j = 0; j < Data[i].length; j++) {
-                if (Data[i][j] != null && Data[i][j].equals("<---")) {
-                    int[] rows = {i};
-                    int[] columns = {j - 1, j};
-                    //cellAtt.combine(rows,columns);
-                }
-            }
-        }
-
-        table.setRowSelectionAllowed(true);
-        table.setColumnSelectionAllowed(true);
-        table.getTableHeader().setReorderingAllowed(false);
-        JTable rowHeader = new JTable(headerData) {
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false; //Disallow the editing of any cell
-            }
-        };
-        //table = new JTable(model)
-
-        LookAndFeel.installColorsAndFont
-                (rowHeader, "TableHeader.background",
-                        "TableHeader.foreground", "TableHeader.font");
-
-
-        rowHeader.setIntercellSpacing(new Dimension(0, 0));
-        Dimension d = rowHeader.getPreferredScrollableViewportSize();
-        d.width = rowHeader.getPreferredSize().width;
-        rowHeader.setPreferredScrollableViewportSize(d);
-        rowHeader.setRowHeight(table.getRowHeight());
-        rowHeader.setDefaultRenderer(Object.class, new RowHeaderRenderer());
-        rowHeader.setRowSelectionAllowed(false);
-        rowHeader.setColumnSelectionAllowed(false);
-        rowHeader.setFocusable(false);
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setRowHeaderView(rowHeader);
-        new RowHeaderResizer(scrollPane).setEnabled(true);
-        JTableHeader corner = rowHeader.getTableHeader();
-        corner.setReorderingAllowed(false);
-        corner.setResizingAllowed(false);
-        corner.setForeground(Color.WHITE);
-        corner.setBackground(Color.WHITE);
-        scrollPane.setCorner(JScrollPane.UPPER_LEFT_CORNER, corner);
-
-
-        JFrame f = new JFrame("Row Header Test");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.getContentPane().add(scrollPane, BorderLayout.CENTER);
-
-        f.pack();
-        f.setLocation(200, 100);
-        f.setVisible(true);
-
+    public MultiSpanCellTable(TableModel model) {
+        super(model);
+        setUI(new MultiSpanCellTableUI());
+        getTableHeader().setReorderingAllowed(false);
+        setCellSelectionEnabled(true);
+        setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     }
+
+    public MultiSpanCellTable() {
+    }
+
 
     public Rectangle getCellRect(int row, int column, boolean includeSpacing) {
         Rectangle sRect = super.getCellRect(row, column, includeSpacing);
@@ -185,4 +127,6 @@ public class RowHeaderTable extends MultiSpanCellTable {
         }
         repaint(dirtyRegion.x, dirtyRegion.y, dirtyRegion.width, dirtyRegion.height);
     }
+
 }
+

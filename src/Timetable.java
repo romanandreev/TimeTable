@@ -10,16 +10,17 @@ class Timetable {
     List<Day> days;
 
     Timetable(Element e) throws Exception {
-        year = Parser.getIntValue(e,"year");
-        semester = Parser.getIntValue(e,"semester");
+        year = Parser.getIntValue(e, "year");
+        semester = Parser.getIntValue(e, "semester");
         NodeList nl = e.getElementsByTagName("weekday");
         days = new ArrayList<Day>();
-        if(nl != null && nl.getLength() > 0) {
-            for(int i = 0 ; i < nl.getLength();i++) {
+        if (nl != null && nl.getLength() > 0) {
+            for (int i = 0; i < nl.getLength(); i++) {
                 days.add(new Day((Element) nl.item(i)));
             }
         }
     }
+
     String[][] getData() {
         int n = 1;
         for (int i = 0; i < days.size(); i++) {
@@ -41,6 +42,7 @@ class Timetable {
         }
         return Data;
     }
+
     void show() {
         RowHeaderTable tb = new RowHeaderTable(getData());
     }

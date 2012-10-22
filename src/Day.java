@@ -24,9 +24,13 @@ class Day {
     }
     String[][] getData() {
         String[][] Data = new String[twoHourClasses.size() + 1][4];
-        Data[0][0] = "==";
+        Data[0][0] = "";
         for (int j = 1; j < 4; j++) {
-            Data[0][j] = "============================";
+            if (j == 1) {
+                Data[0][j] = "============================";
+            } else {
+                Data[0][j] = "<---";
+            }
         }
         for (int j = 0; j < twoHourClasses.size(); j++) {
             String[][] DataTHC = twoHourClasses.get(j).getData();

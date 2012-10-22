@@ -33,9 +33,13 @@ class Lesson {
         String[][] Data = new String[1][3];
         for (int i = 0; i < 3; i++) {
             if (((specialtyMask >> i) & 1) == 1) {
-                Data[0][i] = name + " | " + prof + " | " + location;
+                if (specialtyMask == 7 && i > 0) {
+                    Data[0][i] = "<---";
+                } else {
+                    Data[0][i] = name + " | " + prof + " | " + location;
+                }
             } else {
-                Data[0][i] = "-";
+                Data[0][i] = "";
             }
         }
         return Data;
