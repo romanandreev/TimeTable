@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /** Расписание на семестр */
 @XmlRootElement(name="timetable")
-class Timetable {
+public class Timetable {
 
     private Integer year;
     private Integer semester;

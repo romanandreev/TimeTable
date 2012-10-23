@@ -44,8 +44,8 @@ class Lesson {
                 if (specialtyMask == 7 && i > 0) {
                     Data[0][i] = "<---";
                 } else {
-                    Data[0][i] = getCourse().getName() + " | " + 
-                                 getCourse().getProf() + " | " + location;
+                    Data[0][i] = getCourseName() + " | " + 
+                                 getInstructorName() + " | " + location;
                 }
             } else {
                 Data[0][i] = "";
@@ -84,6 +84,27 @@ class Lesson {
      */
     public Course getCourse() {
         return course;
+    }
+
+    /** Название курса */
+    public String getCourseName() {
+        return course.getName();
+    }
+
+    /** Имя преподавателя */
+    public String getInstructorName() {
+        return course.getInstructorName();
+    }
+
+    /** Дополнить имеющуюся информацию о курсе */
+    public void fetchAdditionalCourseInfo(CourseMap courseMap) {
+        if (course.getId() != null) {
+            CourseInfo courseInfo = courseMap.getCourseByAlias(course.getId());
+            if (courseInfo != null) {
+                course.setInstructor(courseInfo.getInstructor());
+                course.setName(courseInfo.getName());
+            }
+        }
     }
 
     @XmlType
