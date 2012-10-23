@@ -30,10 +30,17 @@ public class Main {
             CourseInfoList saList = (CourseInfoList) courseListUnmarshaller.unmarshal(file);
             courseMap.addCourseInfoList(saList);
 
+            JAXBContext staffContext = JAXBContext.newInstance(Staff.class);
+            Unmarshaller staffUnmarshaller = staffContext.createUnmarshaller();
+
+            file = new File("prof.xml");
+            Staff staff = (Staff) staffUnmarshaller.unmarshal(file);
+            
             for (Day day : table.getDays()) {
                 for (TwoHourClass thclass : day.getTwoHourClasses()) {
                     for (Lesson lesson : thclass.getLessons()) {
                         lesson.fetchAdditionalCourseInfo(courseMap);
+                        lesson.getCourse().getInstructor().fetchNameIfNotSet(staff);
                     }
                 }
             }

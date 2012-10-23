@@ -11,13 +11,24 @@ public class Instructor {
     @XmlValue
     private String name;
 
-    /** Ф.И.О. */
+    /** Фамилия */
     public String getName() {
         return name;
     }
 
     /** Идентификатор преподавателя в XML-файлах */
-    public String getID() {
+    public String getId() {
         return id;
+    }
+
+    public void fetchNameIfNotSet(Staff staff) {
+        if (name != null && !name.equals(""))
+            return;
+        if (id == null)
+            return;
+        Person person = staff.getPersonById(id);
+        if (person == null)
+            return;
+        name = person.getLastName();
     }
 }
