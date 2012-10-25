@@ -2,13 +2,20 @@
   %head
     %title Расписание кафедры статистического моделирования
     %script{ :src => 'js/redips-drag-min.js' }
+    %script{ :src => 'js/redips-table-min.js' }
     %script{ :src => 'js/jquery-1.8.2.min.js'}
     %script{ :src => 'js/jquery.jeditable.mini.js'}
-  
-  %body{ :onload => 'REDIPS.drag.init(); REDIPS.drag.drop_option = "switch";' }
 
+  %body
     :javascript
       $(document).ready(function () {
+
+        REDIPS.drag.init();
+        REDIPS.drag.drop_option = 'switch';
+        REDIPS.table.mark_nonempty = false;
+        REDIPS.table.color.cell = '#FFFFDD';
+        REDIPS.table.onmousedown('timetable', true);
+
         $('.editable').editable(function (value, settings) {
           return(value);
         }, { 
@@ -18,9 +25,21 @@
            });
       });
 
-    - specs = ['sm', 'mm', 'sa']
-    - specnames = ['СМ', 'ММ', 'САПР']
+    %button{ :style => 'position: fixed; top: 200px; right: 5px; width: 50px', :onclick => 'REDIPS.table.merge();' }
+      Merge
+
+    %button{ :style => 'position: fixed; top: 220px; right: 5px; width: 50px', :onclick => 'REDIPS.table.split();' }
+      Split
+
     %div{ :id => 'drag' }
+      %table{ :id => 'helpertable', :style => 'position: fixed; top: 250px; width: 150px; right: 5px', :border => '1px' }
+        %tbody
+          %tr
+            %td{ :class => 'trash', :style => 'height: 64px; background-color: #FFDDDD' }
+              Trash can
+
+      - specs = ['sm', 'mm', 'sa']
+      - specnames = ['СМ', 'ММ', 'САПР']
       %table{ :id => 'timetable', :width => "80%", :border => 1 }
         %tbody
           %tr
