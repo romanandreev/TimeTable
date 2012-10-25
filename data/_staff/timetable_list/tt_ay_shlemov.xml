@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<timetable>
+  <weekday id="mon">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="tue">
+    <two_hours no="1">
+      <lesson year_no="3" type="chair" spec="mm">
+        <location>2408</location>
+        <course id="mm_prog_c_pract">
+          <name>Выч. практика</name>
+          <prof id="ay_shlemov">Шлемов<spec code="nbsp" xmlns:pr="http://statmod.ru/staff"></spec>А.Ю.</prof>
+        </course>
+      </lesson>
+    </two_hours>
+    <two_hours no="2">
+      <lesson year_no="3" type="chair" spec="mm">
+        <location>2511</location>
+        <course id="mm_prog_c_lang">
+          <name>Теория и практика программирования</name>
+          <prof id="ay_shlemov">Шлемов<spec code="nbsp" xmlns:pr="http://statmod.ru/staff"></spec>А.Ю.</prof>
+        </course>
+      </lesson>
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="wed">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="thu">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="fri">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="sat">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+</timetable>

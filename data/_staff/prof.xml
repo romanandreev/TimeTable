@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by  () -->
+<staff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://statmod.ru/staff" xsi:schemaLocation="http://statmod.ru/staff staff.xsd">
+	<person id="sm_ermakov" degree="phd_d" academic_rank="prof">
+		<fn>Сергей</fn>
+		<mn>Михайлович</mn>
+		<ln>Ермаков</ln>
+		<duty academic_rank="prof">
+			<name>Заведующий кафедрой</name>
+			<shortname>Зав. кафедрой</shortname>
+		</duty>
+		<image name="ermakov.gif" w="178" h="204" tw="89" th="103"/>
+		<field>
+			<!-- Область научных интересов -->
+очень обширна, включая метод Монте-Карло (вероятностное решение нелинейных уравнений, 
+вычисление методом Монте-Карло интегралов в смысле главного значения, исследование асинхронных
+стохастических алгоритмов, исследование стохастической устойчивости метода Монте-Карло и многое другое),
+теорию планирования регрессионных и имитационных экспериментов. 
+		</field>
+		<extlink href="/vega/ermakov/ermakov.htm">Статья в юбилейном сборнике кафедры и лаборатории </extlink>
+	</person>
+	<person id="ap_sizova" degree="phd" academic_rank="assoc_prof" image="sizova">
+		<fn>Алла</fn>
+		<mn>Филипповна</mn>
+		<ln>Сизова</ln>
+		<duty academic_rank="assoc_prof">
+						<name>зам.декана</name>
+			<shortname>Зам. декана</shortname>
+		</duty>
+		<image name="sizova.gif" w="178" h="216" tw="84" th="103"/>
+		<field>
+		Решение задач математической и статистической физики методами Монте-Карло.
+		</field>
+	</person>
+
+	<person id="ya_sushkov" degree="phd_d" academic_rank="prof" image="sushkov">
+		<fn>Юрий</fn>
+		<mn>Акимович</mn>
+		<ln>Сушков</ln>
+		<duty academic_rank="prof">
+			<name>Руководитель специализации САПР</name>
+			<shortname/>
+		</duty>
+		<image name="sushkov.gif" w="178" h="213" tw="86" th="103"/>
+		<field>
+   Дискретная математика, теория графов и гиперграфов, методы дискретной и стохастической оптимизации, структурно управляемые системы, моделирование систем. 
+<!--Международный арбитр и международный мастер по шахматным композициям.-->
+		</field>
+		<extlink href="/vega/syschkov/syschkov.htm">Статья в юбилейном сборнике кафедры и лаборатории </extlink>
+	</person>
+	<person id="mk_chirkov" degree="phd_d" academic_rank="prof" image="chirk">
+		<fn>Михаил</fn>
+		<mn>Константинович</mn>
+		<ln>Чирков</ln>
+		<duty academic_rank="prof">
+			<name>Руководитель специализации ММ</name>
+			<shortname/>
+		</duty>
+		<image name="chirk.gif" w="178" h="213" tw="86" th="103"/>
+		<field>дискретная математика, математическое моделирование дискретных процессов и систем, теория и приложения обобщенных автоматных моделей различного типа и сетей Петри, нечеткие множества и моделирование дискретных систем и процессов принятия решений в нечетких условиях, нечеткая логика и системы нечеткого вывода</field>
+		<extlink href="/vega/tchirkov/tchirkov.htm">Статья в юбилейном сборнике кафедры и лаборатории </extlink>
+	</person>
+	<person id="vb_melas" degree="phd_d" academic_rank="prof" image="melas">
+		<fn>Вячеслав</fn>
+		<mn>Борисович</mn>
+		<ln>Мелас</ln>
+		<duty academic_rank="prof">
+			<name/>
+			<shortname/>
+		</duty>
+		<image name="melas.gif" w="178" h="208" tw="88" th="103"/>
+		<field>
+прикладная статистика
+(планирование
+эксперимента, регрессионный анализ и стохастическое моделирование).
+		</field>
+		<extlink href="/vega/melas/melas.htm">Статья в юбилейном сборнике кафедры и лаборатории </extlink>
+	</person>
+	<person id="ms_ermakov" degree="phd_d" academic_rank="prof" image="ermakov_m">
+		<fn>Михаил</fn>
+		<mn>Сергеевич</mn>
+		<ln>Ермаков</ln>
+		<duty academic_rank="prof">
+			<name/>
+			<shortname/>
+		</duty>
+		<image name="ermakovm.gif" w="178" h="218" tw="84" th="103"/>
+		<field>
+математическая статистика: непараметрические методы статистики, статистическое моделирование в математической статистике, некорректные задачи.
+		</field>
+	</person>
+	<person id="vv_nekrutkin" degree="phd" academic_rank="assoc_prof" image="nekr">
+		<fn>Владимир</fn>
+		<mn>Викторович</mn>
+		<ln>Некруткин</ln>
+		<duty academic_rank="assoc_prof">
+			<name>Руководитель специализации СМ</name>
+			<shortname/>
+		</duty>
+		<image name="nekr.gif" w="178" h="211" tw="86" th="103"/>
+		<field>
+теоретические аспекты прикладной теории вероятностей (статистическое моделирование и метод Монте-Карло,
+случайный поиск, анализ данных и модели математической статистики, анализ временных рядов и стохастические процессы, вероятностные модели
+эконометрики). 
+		</field>
+	</person>
+	<person id="ne_golyandina" degree="phd" academic_rank="assoc_prof" image="neg">
+		<fn>Нина</fn>
+		<mn>Эдуардовна</mn>
+		<ln>Голяндина</ln>
+		<duty academic_rank="assoc_prof">
+			<name>ученый секретарь кафедры</name>
+			<shortname/>
+		</duty>
+		<image name="neg.gif" w="178" h="217" tw="84" th="103"/>
+		<field>
+ прикладная статистика
+(анализ временных рядов, построение моделей реальных данных,
+статистическая обработка данных), решение дифференциальных и
+интегральных уравнений методом Монте Карло.
+</field>
+	</person>
+	<person id="ag_bart" degree="phd" academic_rank="assoc_prof" image="bart">
+		<fn>Александр</fn>
+		<mn>Георгиевич</mn>
+		<ln>Барт</ln>
+		<duty academic_rank="assoc_prof">
+			<!-- academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)-->
+			<name/>
+			<!-- Имя должности в скобках -->
+			<shortname/>
+			<!-- Имя должности в таблице с картинками -->
+		</duty>
+		<image name="bart.gif" w="178" h="218" tw="84" th="103"/>
+		<field>
+		применение математических и статистических методов в биологии и медицине.
+			<!-- Область научных интересов -->
+		</field>
+		<extlink href="/vega/bart/bart.htm">Статья в юбилейном сборнике кафедры и лаборатории </extlink>
+	</person>
+	<person id="tm_tovstik" degree="phd" academic_rank="assoc_prof" image="tovstik">
+		<fn>Татьяна</fn>
+		<mn>Михайловна</mn>
+		<ln>Товстик</ln>
+		<duty academic_rank="assoc_prof">
+			<!-- academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)-->
+			<name/>
+			<!-- Имя должности в скобках -->
+			<shortname/>
+			<!-- Имя должности в таблице с картинками -->
+		</duty>
+		<image name="tovstik.gif" w="178" h="212" tw="86" th="103"/>
+		<field>
+		моделирование и статистическая обработка случайных процессов и полей.
+			<!-- Область научных интересов -->
+		</field>
+	</person>
+	<person id="yn_kashtanov" degree="phd" academic_rank="" image="kashtanov">
+		<fn>Юрий</fn>
+		<mn>Николаевич</mn>
+		<ln>Каштанов</ln>
+		<duty academic_rank="assoc_prof">
+			<!-- academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)-->
+			<name/>
+			<!-- Имя должности в скобках -->
+			<shortname/>
+			<!-- Имя должности в таблице с картинками -->
+		</duty>
+		<image name="kashtanov.gif" w="178" h="218" tw="84" th="103"/>
+		<field>
+		статистическое моделирование в задачах мат.физики, механики; финансовая математика.
+			<!-- Область научных интересов -->
+		</field>
+	</person>
+	<person id="nk_krivulin" degree="phd_d" academic_rank="assoc_prof" image="krivulin">
+		<fn>Николай</fn>
+		<mn>Кимович</mn>
+		<ln>Кривулин</ln>
+		<duty academic_rank="assoc_prof">
+			<!-- academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)-->
+			<name/>
+			<!-- Имя должности в скобках -->
+			<shortname/>
+			<!-- Имя должности в таблице с картинками -->
+		</duty>
+		<image name="krivulin.gif" w="178" h="215" tw="85" th="103"/>
+		<field>
+		исследование операций, идемпотентная алгебра и анализ, статистические методы исследования систем с очередями.
+		<!-- Область научных интересов -->
+		</field>
+		<extlink href="/vega/krivulin/krivulin.htm">Статья в юбилейном сборнике кафедры и лаборатории </extlink>
+	</person>
+	<person id="vb_christinich" degree="phd" academic_rank="assoc_prof" image="christ">
+		<fn>Владимир</fn>
+		<mn>Борисович</mn>
+		<ln>Христинич</ln>
+		<duty academic_rank="assoc_prof">
+			<!-- academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)-->
+			<name/>
+			<!-- Имя должности в скобках -->
+			<shortname/>
+			<!-- Имя должности в таблице с картинками -->
+		</duty>
+		<image name="christ.gif" w="177" h="218" tw="83" th="103"/>
+		<field>
+		Архитектура ЭВМ, информатика и технология программирования, математическое моделирование, численные методы.		<!-- Область научных интересов -->
+		</field>
+		<extlink href="http://www.math.spbu.ru/user/christ/" target="_blank">Персональная страница</extlink>
+	</person>
+	<person id="np_alekseeva" degree="phd" academic_rank="assoc_prof" image="alekseeva">
+		<fn>Нина</fn>
+		<mn>Петровна</mn>
+		<ln>Алексеева</ln>
+		<duty academic_rank="assoc_prof">
+			<!-- academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)-->
+			<name/>
+			<!-- Имя должности в скобках -->
+			<shortname/>
+			<!-- Имя должности в таблице с картинками -->
+		</duty>
+		<image name="alekseeva.gif" w="178" h="215" tw="85" th="103"/>
+		<field>
+		конечные геометрии в математической статистике, сложные регуляторные системы, проблема субъективации распределений и 			ее роль в анализе медико-биологических систем, теория информации и ее приложения, анализ данных.
+			<!-- Область научных интересов -->
+		</field>
+		<extlink href="http://mystatbook.narod.ru/" target="_blank">Материалы к занятиям по статистике</extlink>
+	</person>
+	<person id="eg_burnaeva" degree="phd" academic_rank="" image="burnaeva">
+		<fn>Эльфия</fn>
+		<mn>Гарифовна</mn>
+		<ln>Бурнаева</ln>
+		<duty academic_rank="assoc_prof">
+			<!-- academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)-->
+			<name/>
+			<!-- Имя должности в скобках -->
+			<shortname/>
+			<!-- Имя должности в таблице с картинками -->
+		</duty>
+		<image name="burnaeva.gif" w="178" h="208" tw="88" th="103"/>
+		<field>
+			<!-- Область научных интересов -->
+			численное решение уравнения Навье-Стокса; информационные технологии
+		</field>
+	</person>
+	<person id="an_pepelyshev" degree="phd" academic_rank="" image="pepelyshev">
+		<fn>Андрей</fn>
+		<mn>Николаевич</mn>
+		<ln>Пепелышев</ln>
+		<duty academic_rank="assoc_prof">
+			<name/>
+			<shortname/>
+		</duty>
+		<image name="pepelyshev.gif" w="178" h="214" tw="85" th="103"/>
+		<field>
+		построение регрессионных планов эксперимента в планировании эксперимента, прикладная статистика.
+		</field>
+	</person>
+
+	<person id="vn_solntsev" degree="" academic_rank="" image="solncev">
+		<fn>Владислав</fn>
+		<mn>Николаевич</mn>
+		<ln>Солнцев</ln>
+		<duty academic_rank="senior_rf">
+			<!-- academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)-->
+			<name/>
+			<!-- Имя должности в скобках -->
+			<shortname/>
+			<!-- Имя должности в таблице с картинками -->
+		</duty>
+		<image name="solncev.gif" w="178" h="212" tw="86" th="103"/>
+		<field>
+			<!-- Область научных интересов -->
+		статистическое моделирование природных и технических систем: 
+методы стохастической оптимизации – случайного поиска экстремума; 
+развитие методов прикладной многомерной статистики; 
+методов анализа и прогноза временных рядов ("гусеница");
+статистический анализ данных в технике, химии, гидрологии, медицине, экономике.
+ 		</field>
+		<extlink href="/vega/solntcev/solntcev.htm">Статья в юбилейном сборнике кафедры и лаборатории </extlink>
+	</person>
+	<person id="ay_ponomareva" degree="phd" academic_rank="assoc_prof">
+<fn>Aлександра</fn>
+<mn>Юрьевна</mn>
+<ln>Пономарева</ln>
+<duty academic_rank="assoc_prof"><name/><shortname/></duty>
+<image name="ponomareva.jpg" w="178" h="203" tw="89" th="103"/>
+<field>дискретная математика, математическое моделирование дискретных систем, теория и приложения автоматных моделей, сети Петри и параллельные алгоритмы, нечеткая логика и системы нечеткого вывода</field>
+</person>
+
+<person id="ai_korobeynikov" degree="phd" academic_rank="">
+<fn>Антон</fn>
+<mn>Иванович</mn>
+<ln>Коробейников</ln>
+<duty academic_rank="assoc_prof"><name/><shortname/></duty>
+<image name="aik.jpg" w="178" h="212" tw="84" th="100"/>
+<field> программирование, R, прикладная статистика</field>
+</person>
+
+<!--
+	<person id="ai_korobeynikov" degree="phd"  academic_rank="">
+		<fn>Антон</fn>
+		<mn>Иванович</mn>
+		<ln>Коробейников</ln>
+		<field/>
+		
+	</person>
+-->
+
+	<person id="kd_usevich" degree="phd" academic_rank="">
+		<fn>Константин</fn>
+		<mn>Дмитриевич</mn>
+		<ln>Усевич</ln>
+		<field/>
+		
+	</person>
+
+	<person id="is_scherbakova" degree="" academic_rank="">
+		<fn>Ирина</fn>
+		<mn>Сергеевна</mn>
+		<ln>Щербакова</ln>
+		<field/>
+	</person>
+    
+	<person id="pv_shpilev" degree="phd" academic_rank="">
+		<fn>Пётр</fn>
+		<mn>Валерьевич</mn>
+		<ln>Шпилёв</ln>
+		<field/>
+	</person>
+	
+	<person id="pv_gracheva" degree="" academic_rank="">
+		<fn>Полина</fn>
+		<mn>Валерьевна</mn>
+		<ln>Грачева</ln>
+		<field/>
+	</person>
+
+	<person id="ay_shlemov" degree="" academic_rank="">
+		<fn>Александр</fn>
+		<mn>Юрьевич</mn>
+		<ln>Шлемов</ln>
+		<field/>
+	</person>
+	
+	<person id="en_mosyagina" degree="" academic_rank="">
+		<fn>Елизавета</fn>
+		<mn>Николаевна</mn>
+		<ln>Мосягина</ln>
+		<field/>
+	</person>
+
+	<person id="nm_moskaleva" degree="phd" academic_rank="">
+		<fn>Нина</fn>
+		<mn>Михайловна</mn>
+		<ln>Москалева</ln>
+		<field/>
+	</person>
+
+
+	<!--<person id="ma_samakhova" degree="" academic_rank="">
+		<fn>Мария</fn>
+		<mn>Александровна</mn>
+		<ln>Самахова</ln>
+		<field/>
+		<field/>
+	</person>
+-->
+
+	
+	<!--<person id="ka_timofeev" degree="" academic_rank="">
+		<fn>Константин</fn>
+		<mn>Алексеевич</mn>
+		<ln>Тимофеев</ln>
+		<field/>
+	</person>
+-->
+
+	<!-- <person id="" degree="" academic_rank="">
+		< ! - id: идентификатор - >
+		<! - degree: ученая степень  (доктор/кандидат) ->  (phd_d/phd)- ->
+		<! - academic_rank: ученое звание  (доцент/профессор/ст.научн. сотрудник) ->  (accos_prof/prof/senior_rf)- ->
+		<fn/>
+		<!- - Имя - ->
+		<mn/>
+		<!- - Отчество - ->
+		<ln/>
+		<!- - Фамилия - ->
+		<duty academic_rank="">
+			<!- - academic_rank:  (доцент/профессор/ст.научн. сотрудник) в должности ->  (accos_prof/prof/senior_rf)- ->
+			<name/>
+			<!- - Имя должности в скобках - ->
+			<shortname/>
+			<!- - Имя должности в таблице с картинками - ->
+		</duty>
+		<field>
+			<!- - Область научных интересов - ->
+		</field>
+	</person> -->
+</staff>

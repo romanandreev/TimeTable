@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<timetable>
+  <weekday id="mon">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="tue">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="wed">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+      <lesson year_no="4" type="chair" spec="mm">
+        <location>2406</location>
+        <course id="mm_prog_cpp_advanced">
+          <name>Спец. выч. практикум</name>
+          <prof id="pv_shpilev">Шпилёв<spec code="nbsp" xmlns:pr="http://statmod.ru/staff"></spec>П.В.</prof>
+        </course>
+      </lesson>
+    </two_hours>
+    <two_hours no="3">
+      <lesson year_no="4" type="chair" spec="mm">
+        <location>2406</location>
+        <course id="mm_prog_cpp_pract">
+          <name>Практикум по совр. прикл. программированию</name>
+          <prof id="pv_shpilev">Шпилёв<spec code="nbsp" xmlns:pr="http://statmod.ru/staff"></spec>П.В.</prof>
+        </course>
+      </lesson>
+    </two_hours>
+    <two_hours no="4">
+      <lesson year_no="4" type="chair" spec="mm">
+        <location>3510</location>
+        <course id="mm_exper_design">
+          <name>Анализ регрессионных моделей</name>
+          <prof id="pv_shpilev">Шпилёв<spec code="nbsp" xmlns:pr="http://statmod.ru/staff"></spec>П.В.</prof>
+        </course>
+      </lesson>
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="thu">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="fri">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+  <weekday id="sat">
+    <two_hours no="1">
+    </two_hours>
+    <two_hours no="2">
+    </two_hours>
+    <two_hours no="3">
+    </two_hours>
+    <two_hours no="4">
+    </two_hours>
+    <two_hours no="5">
+    </two_hours>
+  </weekday>
+</timetable>
