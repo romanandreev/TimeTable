@@ -1,3 +1,8 @@
 - unless lesson.nil?
-  %div{ :class => 'drag'}
-    = lesson.course.name
+  %div{ :class => 'drag' }
+    %div{ :class => 'editable', :align => 'center', :style => 'height:18px'  }
+      = lesson.course.name
+    %div{ :class => 'editable', :align => 'center', :style => 'height:18px'  }
+      = lesson.course.prof
+    %div{ :class => 'editable', :align => 'center', :style => 'height:18px'  }
+      = lesson.location

@@ -10,6 +10,12 @@
 
 4. Запуститe `ruby app.rb`
 
+## Онлайн-версия
+
+Текущая версия приложения доступна по адресу <http://statmod-timetable.heroku.com>
+
+([Heroku](http://www.heroku.com/) - облачная платформа для развёртывания веб-приложений.)
+
 ## Используемые компоненты
 
 ### [Sinatra](http://www.sinatrarb.com/)
@@ -27,3 +33,7 @@
 ### [REDIPS.drag](http://www.redips.net/javascript/drag-and-drop-table-content/)
 
 Библиотека для отображения таблиц с огромным числом возможностей (JavaScript).
+
+### [Jeditable](http://www.appelsiini.net/projects/jeditable)
+
+JQuery in-place editor: div-ы по щелчку мыши превращаются в поля ввода текста.
