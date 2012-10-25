@@ -14,7 +14,7 @@
               - specnames.each do |name|
                 %td{:bgcolor => '#DDDDFF', :align => 'center', :width => '33%'}
                   = name
-          - timetable.weekday_tables.each do |weekday|
+          - @timetable.weekday_tables.each do |weekday|
             %tr
               %th
 
@@ -33,10 +33,7 @@
                     %td
                       - unless double_class.nil?
                         - lesson = double_class.getLessonForSpec(spec)
-                        - unless lesson.nil?
-                          %div{ :class => 'drag'}
-                            = lesson.course.name
+                        = haml :lesson, :locals => { :lesson => lesson }
                 - else
                   %td{ :colspan => 3, :align => 'center' }
-                    %div{ :class => 'drag'}
-                      = dep_lesson.course.name
+                    = haml :lesson, :locals => { :lesson => dep_lesson }

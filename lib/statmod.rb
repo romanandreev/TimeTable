@@ -1,10 +1,6 @@
-require 'timetable.rb'
-require 'haml'
+require_relative './timetable.rb'
 
-class Renderer
-    def initialize(template_fn)
-      @engine = Haml::Engine.new(File.read(template_fn))
-    end
+class Statmod
 
     def loadSpecData(filename)
       spec = CourseList.parse(File.read(filename))
@@ -24,9 +20,9 @@ class Renderer
       end
     end
 
-    def table(filename)
+    def getTimeTable(filename)
       timetable = TimeTable.parse(File.read(filename))
       timetable.updateCourseInfo(@courses)
-      @engine.render(Object.new, :timetable => timetable)
+      timetable
     end
 end
