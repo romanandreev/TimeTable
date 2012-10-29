@@ -51,18 +51,18 @@
         %a{ :href => '5course' }
           5 курс
 
-    %button{ :style => 'position: fixed; top: 180px; right: 5px; width: 200px', :onclick => 'REDIPS.table.merge();' }
+    %button{ :style => 'position: fixed; top: 180px; right: 5px; width: 250px', :onclick => 'REDIPS.table.merge();' }
       Merge
 
-    %button{ :style => 'position: fixed; top: 200px; right: 5px; width: 200px', :onclick => 'REDIPS.table.split();' }
+    %button{ :style => 'position: fixed; top: 200px; right: 5px; width: 250px', :onclick => 'REDIPS.table.split();' }
       Split
 
-    %button{ :style => 'position: fixed; top: 220px; right: 5px; width: 200px', :onclick => 'createNewLesson();' }
+    %button{ :style => 'position: fixed; top: 220px; right: 5px; width: 250px', :onclick => 'createNewLesson();' }
       New
 
 
     %div{ :id => 'drag' }
-      %table{ :id => 'helpertable', :style => 'position: fixed; top: 250px; width: 200px; right: 5px', :border => '1px' }
+      %table{ :id => 'helpertable', :style => 'position: fixed; top: 250px; width: 250px; right: 5px', :border => '1px' }
         %tbody
           %tr
             %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark'}
@@ -71,14 +71,14 @@
             %td{ :class => 'trash', :align => 'center', :style => 'height: 64px; background-color: #FFDDDD' }
               Чтобы удалить, перетащите сюда
 
-      %form{ :style => 'position: fixed; top: 395px; right: 5px; width: 200px', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
+      %form{ :style => 'position: fixed; top: 395px; right: 5px; width: 250px', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
         %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
-        %input{ :type => 'submit', :style => 'position: fixed; top: 400px; right: 5px; width: 200px', :value => 'Save to XML' }
+        %input{ :type => 'submit', :style => 'position: fixed; top: 400px; right: 5px; width: 250px', :value => 'Save to XML' }
 
       - specs = ['sm', 'mm', 'sa']
       - specnames = ['СМ', 'ММ', 'САПР']
-      %table{ :id => 'timetable', :width => "80%", :border => 1 }
+      %table{ :id => 'timetable', :width => "80%", :border => 1, :style => 'border-collapse: collapse' }
         %tbody
           %tr
             %th{ :width => '5%', :class => 'mark' }
