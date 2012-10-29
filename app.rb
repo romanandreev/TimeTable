@@ -34,6 +34,13 @@ get '/5course' do
   haml :timetable
 end
 
+get '/edit/:filename' do |fn|
+  @filename = fn
+  @timetable = statmod.getTimeTable(File.dirname(__FILE__) + "/data/_courses/#{fn}") 
+  @course = (@timetable.semester + 1) / 2;
+  haml :timetable
+end
+
 get '/' do
   redirect '/3course'
 end

@@ -8,19 +8,34 @@ function getTimeTableXml() {
         if (typeof attrs === undefined) {
             attrs = {};
         }
-        return ['<', tag].concat(_.map(attrs, function(val, key) {
-                                return [' ', key, '="', val, '"'].join('');
-                            })).concat(['>', contents, '</', tag, '>']).join('');
+        var attrStrArray = _.map(attrs, function(val, key) {
+                                            return [' ', key, '="', val, '"'].join('');
+                                        });
+        if (!contents) {
+            return ['<', tag].concat(attrStrArray).concat([' />']).join('');
+        } else {
+            return ['<', tag].concat(attrStrArray).concat(['>', contents, '</', tag, '>']).join('');
+        }
     }
 
     function getTwoHoursXml(lessons) {
         return _.map(lessons, function(lesson) {
-            var lessontype = lesson[1] == 'all' ? 'dep' : 'chair';
             var loc = xmlElement(getAttr(lesson, '.loc'), 'location');
             var name = xmlElement(getAttr(lesson, '.name'), 'name');
             var prof = xmlElement(getAttr(lesson, '.prof'), 'prof');
             var course = xmlElement(name + '\n' + prof, 'course');
-            var xml = xmlElement(loc + '\n' + course, 'lesson', { type : lessontype, spec : lesson[1] });
+            
+            var checkboxes = lesson[0].find("input[type=checkbox]");
+            var fortnightly = 0;
+            if ($(checkboxes[0]).attr('checked') == 'checked')
+                fortnightly += 1;
+            if ($(checkboxes[1]).attr('checked') == 'checked')
+                fortnightly += 2;
+
+            if (fortnightly != 3 && fortnightly != 0) {
+                course += '\n' + xmlElement('', 'fortnightly', { type : fortnightly });
+            }
+            var xml = xmlElement(loc + '\n' + course, 'lesson', { spec : lesson[1] });
             return xml;
         }).join('\n');
     }
@@ -31,7 +46,7 @@ function getTimeTableXml() {
             return xmlElement(_.filter(_.map(rows, function(r) {
                         var row = $(r);
                         var curIndex = row.find("th").text().trim();
-                        var cols = _.map(row.find('td'), function(c) { return $(c); });
+                        var cols = _.map(row.find('td.lesson'), function(c) { return $(c); });
                         var lessons = undefined;
                         if (cols.length == 1) {
                             lessons = _.zip(cols, ["all"]);

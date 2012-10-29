@@ -1,8 +1,16 @@
 - unless lesson.nil?
   %div{ :class => 'drag' }
-    %div{ :class => 'editable name', :align => 'center' }
-      = lesson.course.name
-    %div{ :class => 'editable prof', :align => 'center', :style => 'height:18px'  }
-      = lesson.course.prof
-    %div{ :class => 'editable loc', :align => 'center', :style => 'height:18px'  }
-      = lesson.location
+    %table{ :height => '100%', :width => '100%' }
+      %tbody
+        %tr
+          %td{ :class => 'mark' }
+            %div{ :class => 'editable name', :align => 'center' }
+              = lesson.course.name
+            %div{ :class => 'editable prof', :align => 'center', :style => 'height:18px'  }
+              = lesson.course.prof
+            %div{ :class => 'editable loc', :align => 'center'  }
+              = lesson.location
+          %td{ :style => 'width:20px; padding-right: 2px', :class => 'mark' }
+            %input{ :type => 'checkbox', :checked => lesson.numerator? }
+            %hr{ :size => 1}
+            %input{ :type => 'checkbox', :checked => lesson.denominator? }

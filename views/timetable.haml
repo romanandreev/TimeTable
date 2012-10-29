@@ -1,13 +1,13 @@
 %html
   %head
     %title Расписание #{@course}-го курса СтатМода
-    %script{ :src => 'js/redips-drag-min.js' }
-    %script{ :src => 'js/redips-table-min.js' }
-    %script{ :src => 'js/jquery-1.8.2.min.js'}
-    %script{ :src => 'js/jquery.jeditable.mini.js'}
-    %script{ :src => 'js/underscore-min.js' }
-    %script{ :src => 'js/createNewLesson.js' }
-    %script{ :src => 'js/saveToXml.js' }
+    %script{ :src => '/js/redips-drag-min.js' }
+    %script{ :src => '/js/redips-table-min.js' }
+    %script{ :src => '/js/jquery-1.8.2.min.js'}
+    %script{ :src => '/js/jquery.jeditable.mini.js'}
+    %script{ :src => '/js/underscore-min.js' }
+    %script{ :src => '/js/createNewLesson.js' }
+    %script{ :src => '/js/saveToXml.js' }
 
     %body
     :javascript
@@ -51,18 +51,18 @@
         %a{ :href => '5course' }
           5 курс
 
-    %button{ :style => 'position: fixed; top: 180px; right: 5px; width: 150px', :onclick => 'REDIPS.table.merge();' }
+    %button{ :style => 'position: fixed; top: 180px; right: 5px; width: 200px', :onclick => 'REDIPS.table.merge();' }
       Merge
 
-    %button{ :style => 'position: fixed; top: 200px; right: 5px; width: 150px', :onclick => 'REDIPS.table.split();' }
+    %button{ :style => 'position: fixed; top: 200px; right: 5px; width: 200px', :onclick => 'REDIPS.table.split();' }
       Split
 
-    %button{ :style => 'position: fixed; top: 220px; right: 5px; width: 150px', :onclick => 'createNewLesson();' }
+    %button{ :style => 'position: fixed; top: 220px; right: 5px; width: 200px', :onclick => 'createNewLesson();' }
       New
 
 
     %div{ :id => 'drag' }
-      %table{ :id => 'helpertable', :style => 'position: fixed; top: 250px; width: 150px; right: 5px', :border => '1px' }
+      %table{ :id => 'helpertable', :style => 'position: fixed; top: 250px; width: 200px; right: 5px', :border => '1px' }
         %tbody
           %tr
             %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark'}
@@ -71,10 +71,10 @@
             %td{ :class => 'trash', :align => 'center', :style => 'height: 64px; background-color: #FFDDDD' }
               Чтобы удалить, перетащите сюда
 
-      %form{ :style => 'position: fixed; top: 395px; right: 5px; width: 150px', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
+      %form{ :style => 'position: fixed; top: 395px; right: 5px; width: 200px', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
         %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
-        %input{ :type => 'submit', :style => 'position: fixed; top: 400px; right: 5px; width: 150px', :value => 'Save to XML...' }
+        %input{ :type => 'submit', :style => 'position: fixed; top: 400px; right: 5px; width: 200px', :value => 'Save to XML' }
 
       - specs = ['sm', 'mm', 'sa']
       - specnames = ['СМ', 'ММ', 'САПР']
@@ -101,10 +101,10 @@
                 - dep_lesson = if double_class.nil? then nil else double_class.getLessonForSpec 'all' end
                 - if dep_lesson.nil?
                   - specs.each do |spec|
-                    %td
+                    %td{ :class => 'lesson' }
                       - unless double_class.nil?
                         - lesson = double_class.getLessonForSpec(spec)
                         = haml :lesson, :locals => { :lesson => lesson }
                 - else
-                  %td{ :colspan => 3, :align => 'center' }
+                  %td{ :colspan => 3, :align => 'center', :class => 'lesson' }
                     = haml :lesson, :locals => { :lesson => dep_lesson }
