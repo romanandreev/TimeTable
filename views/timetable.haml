@@ -5,7 +5,9 @@
     %script{ :src => 'js/redips-table-min.js' }
     %script{ :src => 'js/jquery-1.8.2.min.js'}
     %script{ :src => 'js/jquery.jeditable.mini.js'}
+    %script{ :src => 'js/underscore-min.js' }
     %script{ :src => 'js/createNewLesson.js' }
+    %script{ :src => 'js/saveToXml.js' }
 
     %body
     :javascript
@@ -24,8 +26,20 @@
              data: function(str) { return $.trim(str); },
              placeholder: ''
            });
+
+        $('#xmlsaveform').submit(function() {
+          $('#xmldata').val(getTimeTableXml());
+          return true;
+        });
       });
-    
+
+    %input{ :id => 'year', :style => 'position: fixed; top: 20px; right: 5px; width: 100px', :value => @timetable.year }
+      %label{ :for => 'year', :style => 'position: fixed; top: 20px; right: 115px; width: 100px; text-align: right' }
+        Год
+    %input{ :id => 'sem', :style => 'position: fixed; top: 50px; right: 5px; width: 100px', :value => @timetable.semester }
+      %label{ :for => 'sem', :style => 'position: fixed; top: 50px; right: 115px; width: 100px; text-align: right' }
+        Семестр
+
     %div{ :id => 'links', :style => 'position: fixed; top: 100px; right: 5px' }
       %div
         %a{ :href => '3course' }
@@ -46,6 +60,7 @@
     %button{ :style => 'position: fixed; top: 220px; right: 5px; width: 150px', :onclick => 'createNewLesson();' }
       New
 
+
     %div{ :id => 'drag' }
       %table{ :id => 'helpertable', :style => 'position: fixed; top: 250px; width: 150px; right: 5px', :border => '1px' }
         %tbody
@@ -56,15 +71,20 @@
             %td{ :class => 'trash', :align => 'center', :style => 'height: 64px; background-color: #FFDDDD' }
               Чтобы удалить, перетащите сюда
 
+      %form{ :style => 'position: fixed; top: 395px; right: 5px; width: 150px', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
+        %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
+        %input{ :type => 'hidden', :name => 'filename', :value => @filename }
+        %input{ :type => 'submit', :style => 'position: fixed; top: 400px; right: 5px; width: 150px', :value => 'Save to XML...' }
+
       - specs = ['sm', 'mm', 'sa']
       - specnames = ['СМ', 'ММ', 'САПР']
       %table{ :id => 'timetable', :width => "80%", :border => 1 }
         %tbody
           %tr
-            %th{:width => '5%', :class => 'mark' }
-              - specnames.each do |name|
-                %td{:bgcolor => '#DDDDFF', :align => 'center', :width => '33%', :class => 'mark' }
-                  = name
+            %th{ :width => '5%', :class => 'mark' }
+            - specnames.each do |name|
+              %td{ :bgcolor => '#DDDDFF', :align => 'center', :width => '33%', :class => 'mark' }
+                = name
           - @timetable.weekday_tables.each do |weekday|
             %tr
               %th{ :class => 'mark' }
@@ -73,8 +93,8 @@
                 = weekday.name
 
             - 1.upto(5).each do |index|
-              %tr
-                %th{:bgcolor => 'greenyellow', :style => 'height: 64px', :class => 'mark' }
+              %tr{ :class => weekday.id }
+                %th{ :bgcolor => 'greenyellow', :style => 'height: 64px', :class => 'mark' }
                   = index
 
                 - double_class = weekday.getDoubleClass(index)

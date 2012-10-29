@@ -1,8 +1,8 @@
 function createNewLesson() {
     var cell = $("#newlesson");
-    var divCourseName = '<div class="newlessonfield" align="center" style="height:18px">/название предмета/</div>';
-    var divInstructorName = '<div class="newlessonfield" align="center" style="height:18px">/преподаватель/</div>';
-    var divLocation = '<div class="newlessonfield" align="center" style="height:18px">/аудитория/</div>';
+    var divCourseName = '<div class="newlessonfield name" align="center" style="height:18px">/название предмета/</div>';
+    var divInstructorName = '<div class="newlessonfield prof" align="center" style="height:18px">/преподаватель/</div>';
+    var divLocation = '<div class="newlessonfield loc" align="center" style="height:18px">/аудитория/</div>';
     var divNewLesson = '<div class="drag" id="newlessondiv">' + divCourseName + divInstructorName + divLocation + '</div>';
     var tdNewLesson = '<td id="newlessonEditor" style="height:64px">' + divNewLesson + '</td>'; 
     var oldContent = cell.replaceWith(tdNewLesson);

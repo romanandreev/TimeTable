@@ -1,8 +1,8 @@
 - unless lesson.nil?
   %div{ :class => 'drag' }
-    %div{ :class => 'editable', :align => 'center' }
+    %div{ :class => 'editable name', :align => 'center' }
       = lesson.course.name
-    %div{ :class => 'editable', :align => 'center', :style => 'height:18px'  }
+    %div{ :class => 'editable prof', :align => 'center', :style => 'height:18px'  }
       = lesson.course.prof
-    %div{ :class => 'editable', :align => 'center', :style => 'height:18px'  }
+    %div{ :class => 'editable loc', :align => 'center', :style => 'height:18px'  }
       = lesson.location
