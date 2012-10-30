@@ -8,9 +8,9 @@
               = lesson.course.name
             %div{ :class => 'editable prof', :align => 'center', :style => 'height:18px'  }
               = lesson.course.prof
-            %div{ :class => 'editable loc', :align => 'center'  }
+            %div{ :class => 'editable loc', :align => 'center', :style => 'height:18px' }
               = lesson.location
-          %td{ :style => 'width:20px; padding-right: 2px', :class => 'mark' }
+          %td{ :style => 'width:20px; padding-right: 2px', :class => 'mark'}
             %input{ :type => 'checkbox', :checked => lesson.numerator? }
             %hr{ :size => 1}
             %input{ :type => 'checkbox', :checked => lesson.denominator? }
