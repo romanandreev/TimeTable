@@ -1,7 +1,6 @@
 class Staff
   include HappyMapper
 
-  namespace 'http://statmod.ru/staff'
   tag 'staff'
 
   has_many :persons, Person, :tag => 'person'

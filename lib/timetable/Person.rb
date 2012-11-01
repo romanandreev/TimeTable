@@ -1,7 +1,6 @@
 class Person
   include HappyMapper
 
-  namespace 'http://statmod.ru/staff'
   tag 'person'
 
   has_one :first_name, String, :tag => 'fn'

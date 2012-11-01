@@ -1,7 +1,6 @@
 class CourseInfo
   include HappyMapper
 
-  namespace 'http://statmod.ru/courses'
   tag 'course'
 
   attribute :alias, String

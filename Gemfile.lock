@@ -2,9 +2,9 @@ GEM
   remote: http://rubygems.org/
   specs:
     haml (3.1.7)
-    happymapper (0.4.0)
-      libxml-ruby (~> 2.0)
-    libxml-ruby (2.3.3)
+    nokogiri (1.5.5)
+    nokogiri-happymapper (0.5.5)
+      nokogiri (~> 1.4)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -21,6 +21,6 @@ PLATFORMS
 
 DEPENDENCIES
   haml
-  happymapper
+  nokogiri-happymapper
   shotgun
   sinatra
