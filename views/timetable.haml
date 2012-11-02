@@ -59,19 +59,19 @@
     %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split();' }
       Split
 
-    %button{ :class => 'NewButton', :onclick => 'createNewLesson();' }
-      New
+    /%button{ :class => 'NewButton', :onclick => 'createNewLesson();' }
+    /  New
 
 
     %div{ :id => 'drag' }
       %table{ :id => 'helpertable', :class => 'HelperTable' }
         %tbody
           %tr
-            %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark'}
-              Чтобы создать, нажмите "New"
+            %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark', :onclick => 'createNewLesson();'}
+              Нажмите, чтобы создать новую пару
           %tr
             %td{ :class => 'trash', :align => 'center', :style => 'height: 64px;' }
-              Чтобы удалить, перетащите сюда
+              Чтобы удалить пару, перетащите её сюда
 
       %form{ :class => 'SaveForm', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
         %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
