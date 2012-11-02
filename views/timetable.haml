@@ -8,6 +8,8 @@
     %script{ :src => '/js/underscore-min.js' }
     %script{ :src => '/js/createNewLesson.js' }
     %script{ :src => '/js/saveToXml.js' }
+    %link(rel="stylesheet" type="text/css" href="/styles/TimeTable.css")
+
 
     %body
     :javascript
@@ -33,68 +35,68 @@
         });
       });
 
-    %input{ :id => 'year', :style => 'position: fixed; top: 20px; right: 5px; width: 100px', :value => @timetable.year }
-      %label{ :for => 'year', :style => 'position: fixed; top: 20px; right: 115px; width: 100px; text-align: right' }
+    %input{ :id => 'year', :class => 'YearSelector', :value => @timetable.year }
+      %label{ :for => 'year', :class => 'YearLabel' }
         Год
-    %input{ :id => 'sem', :style => 'position: fixed; top: 50px; right: 5px; width: 100px', :value => @timetable.semester }
-      %label{ :for => 'sem', :style => 'position: fixed; top: 50px; right: 115px; width: 100px; text-align: right' }
+    %input{ :id => 'sem', :class => 'SemesterSelector', :value => @timetable.semester }
+      %label{ :for => 'sem', :class => 'SemesterLabel' }
         Семестр
 
-    %div{ :id => 'links', :style => 'position: fixed; top: 100px; right: 5px' }
+    %div{ :id => 'links', :class => 'CourseDiv' }
       %div
-        %a{ :href => '3course' }
+        %a{ :href => '3course', :class => 'CourseLink' }
           3 курс
       %div
-        %a{ :href => '4course' }
+        %a{ :href => '4course', :class => 'CourseLink' }
           4 курс
       %div
-        %a{ :href => '5course' }
+        %a{ :href => '5course', :class => 'CourseLink' }
           5 курс
 
-    %button{ :style => 'position: fixed; top: 180px; right: 5px; width: 250px', :onclick => 'REDIPS.table.merge();' }
+    %button{ :class => 'MergeButton', :onclick => 'REDIPS.table.merge();' }
       Merge
 
-    %button{ :style => 'position: fixed; top: 200px; right: 5px; width: 250px', :onclick => 'REDIPS.table.split();' }
+    %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split();' }
       Split
 
-    %button{ :style => 'position: fixed; top: 220px; right: 5px; width: 250px', :onclick => 'createNewLesson();' }
+    %button{ :class => 'NewButton', :onclick => 'createNewLesson();' }
       New
 
 
     %div{ :id => 'drag' }
-      %table{ :id => 'helpertable', :style => 'position: fixed; top: 250px; width: 250px; right: 5px', :border => '1px' }
+      %table{ :id => 'helpertable', :class => 'HelperTable' }
         %tbody
           %tr
             %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark'}
               Чтобы создать, нажмите "New"
           %tr
-            %td{ :class => 'trash', :align => 'center', :style => 'height: 64px; background-color: #FFDDDD' }
+            %td{ :class => 'trash', :align => 'center', :style => 'height: 64px;' }
               Чтобы удалить, перетащите сюда
 
-      %form{ :style => 'position: fixed; top: 395px; right: 5px; width: 250px', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
+      %form{ :class => 'SaveForm', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
         %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
-        %input{ :type => 'submit', :style => 'position: fixed; top: 400px; right: 5px; width: 250px', :value => 'Save to XML' }
+        %input{ :type => 'submit', :class => 'SaveButton', :value => 'Save to XML' }
 
       - specs = ['sm', 'mm', 'sa']
       - specnames = ['СМ', 'ММ', 'САПР']
-      %table{ :id => 'timetable', :width => "80%", :border => 1, :style => 'border-collapse: collapse' }
+      %table{ :id => 'timetable', :class => 'TimeTable', :border => '1px' }
         %tbody
           %tr
-            %th{ :width => '5%', :class => 'mark' }
+            %th{ :width => '5%', :class => 'mark', :bgcolor => '#fffd73' }
             - specnames.each do |name|
               %td{ :bgcolor => '#DDDDFF', :align => 'center', :width => '33%', :class => 'mark' }
                 = name
           - @timetable.weekday_tables.each do |weekday|
             %tr
-              %th{ :class => 'mark' }
+              %th{ :class => 'mark', :bgcolor => '#fffd73' }
 
-              %th{ :colspan => 3, :bgcolor => 'yellow', :class => 'mark' }
+              %th{ :colspan => 3, :bgcolor => '#ffc073', :class => 'mark' }
                 = weekday.name
 
             - 1.upto(5).each do |index|
               %tr{ :class => weekday.id }
-                %th{ :bgcolor => 'greenyellow', :style => 'height: 64px', :class => 'mark' }
+                %th{ :bgcolor => '#ffcd00', :style => 'height: 64px', :class => 'mark' }
                   = index
 
                 - double_class = weekday.getDoubleClass(index)

@@ -1,0 +1,109 @@
+.YearSelector {
+	position: fixed;
+	top: 20px;
+	right: 5px;
+	width: 100px;
+}
+
+.YearLabel {
+	position: fixed;
+	top: 20px;
+	right: 115px;
+	width: 100px;
+	text-align: right;
+}
+
+.SemesterSelector {
+	position: fixed;
+	top: 50px;
+	right: 5px;
+	width: 100px;
+}
+
+.SemesterLabel {
+	position: fixed;
+	top: 50px;
+	right: 115px;
+	width: 100px;
+	text-align: right;
+}
+
+.CourseDiv {
+	position: fixed;
+	top: 100px;
+	right: 5px;
+}
+
+.CourseLink {
+
+}
+
+.MergeButton {
+	position: fixed;
+	top: 180px;
+	right: 5px;
+	width: 250px
+}
+
+.SplitButton {
+	position: fixed;
+	top: 200px;
+	right: 5px;
+	width: 250px
+}
+
+.NewButton {
+	position: fixed;
+	top: 220px;
+	right: 5px;
+	width: 250px
+}
+
+.HelperTable {
+	position: fixed;
+	top: 250px;
+	width: 250px;
+	right: 5px;
+	border: 1px solid black;
+}
+
+.HelperTableCell {
+	position: fixed;
+	top: 250px;
+	width: 250px;
+	right: 5px;
+	border: 1px solid black;
+}
+
+.LessonTable {
+	height: 100%;
+	width: 100%;
+}
+
+.SaveForm {
+	position: fixed;
+	top: 395px;
+	right: 5px;
+	width: 250px
+}
+
+.SaveButton {
+	position: fixed;
+	top: 400px;
+	right: 5px;
+	width: 250px
+}
+
+table.TimeTable {
+	width: 80%;
+	border-collapse: collapse;
+}
+
+.drag {
+	border: 1px dashed blue;
+	background-color: #eeeeff;
+}
+
+.trash {
+	background-color: #FFDDDD
+}
