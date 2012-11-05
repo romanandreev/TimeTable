@@ -102,6 +102,7 @@ table.TimeTable {
 .drag {
 	border: 1px dashed blue;
 	background-color: #eeeeff;
+	border-radius: 4px; /* Opera, Chrome */
 }
 
 .trash {
