@@ -25,4 +25,10 @@ function createNewLesson() {
             $("#newlessonEditor").replaceWith(oldContent);
         }
     };
+    REDIPS.drag.myhandler_deleted = function(target_cell) {
+        if ($(REDIPS.drag.obj).attr('id') == 'newlessondiv' && $(target_cell).attr('id') != 'newlessonEditor') {
+            $("#newlessonEditor").replaceWith(oldContent);
+        }
+    };
+
 }
