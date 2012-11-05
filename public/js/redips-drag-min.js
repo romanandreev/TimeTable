@@ -142,7 +142,7 @@ REDIPS.drag = (function () {
 		mark = {action: 'deny',
 				cname: 'mark',
 				exception: []},
-		border = 'solid',				// (string) border style for enabled elements
+		border = '',				// (string) border style for enabled elements
 		border_disabled = 'dotted',		// (string) border style for disabled elements
 		opacity_disabled,				// (integer) set opacity for disabled elements
 		table_sort = true,				// (boolean) sort tables on DIV element click
