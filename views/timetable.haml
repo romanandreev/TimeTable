@@ -20,6 +20,8 @@
           $(this).parents(".drag").remove();
         });
 
+        $("#newlesson").one("click", createNewLesson);
+
         REDIPS.drag.enable_table(false, 'LessonTable');
         REDIPS.drag.init();
         REDIPS.drag.drop_option = 'single';
@@ -65,15 +67,11 @@
     %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split();' }
       Split
 
-    /%button{ :class => 'NewButton', :onclick => 'createNewLesson();' }
-    /  New
-
-
     %div{ :id => 'drag' }
       %table{ :id => 'helpertable', :class => 'HelperTable' }
         %tbody
           %tr
-            %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark', :onclick => 'createNewLesson();'}
+            %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark'}
               Нажмите, чтобы создать новую пару
 
       %form{ :class => 'SaveForm', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
