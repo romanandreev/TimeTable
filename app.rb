@@ -1,5 +1,13 @@
+# encoding: UTF-8
+
 require 'sinatra'
 require 'haml'
+
+set :environment, :production
+
+before do
+  content_type :html, 'charset' => 'utf-8'
+end
 
 require_relative 'lib/statmod.rb'
 
@@ -12,6 +20,14 @@ statmod.loadStaffData(File.dirname(__FILE__) + '/data/_staff/prof.xml')
 timetable3 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/_courses/3course.xml')
 timetable4 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/_courses/4course.xml')
 timetable5 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/_courses/5course.xml')
+
+newlesson = Lesson.new
+course = Course.new
+course.prof = 'пrеподаватель'
+course.name = 'название пrедмета'
+newlesson.fortnightly = nil
+newlesson.course = course
+newlesson.location = 'аудитоrия'
 
 get '/3course' do
   @filename = '3course.xml'
@@ -49,4 +65,8 @@ post '/save' do
   content_type 'application/octet-stream'
   attachment params[:filename]
   params[:xmldata]
+end
+
+get '/newlesson' do
+  @newlessonresponse ||= haml :newlesson, :locals => { :lesson => newlesson }
 end

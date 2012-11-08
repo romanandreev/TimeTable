@@ -1,3 +1,4 @@
+!!!
 %html
   %head
     %title Расписание #{@course}-го курса СтатМода
@@ -15,6 +16,11 @@
     :javascript
       $(document).ready(function () {
 
+        $(".DeleteButton").click(function() {
+          $(this).parents(".drag").remove();
+        });
+
+        REDIPS.drag.enable_table(false, 'LessonTable');
         REDIPS.drag.init();
         REDIPS.drag.drop_option = 'single';
         REDIPS.table.mark_nonempty = false;
@@ -69,9 +75,6 @@
           %tr
             %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark', :onclick => 'createNewLesson();'}
               Нажмите, чтобы создать новую пару
-          %tr
-            %td{ :class => 'trash', :align => 'center', :style => 'height: 64px;' }
-              Чтобы удалить пару, перетащите её сюда
 
       %form{ :class => 'SaveForm', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
         %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
@@ -106,7 +109,11 @@
                     %td{ :class => 'lesson' }
                       - unless double_class.nil?
                         - lesson = double_class.getLessonForSpec(spec)
-                        = haml :lesson, :locals => { :lesson => lesson }
+                        - unless lesson.nil?
+                          %div{ :class => 'drag' }
+                            = haml :lesson, :locals => { :lesson => lesson }
                 - else
                   %td{ :colspan => 3, :align => 'center', :class => 'lesson' }
-                    = haml :lesson, :locals => { :lesson => dep_lesson }
+                    - unless dep_lesson.nil?
+                      %div{ :class => 'drag' }
+                        = haml :lesson, :locals => { :lesson => dep_lesson }

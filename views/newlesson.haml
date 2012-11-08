@@ -1,0 +1,3 @@
+%td{ :id => 'newlessonEditor', :class => 'lesson', :style => 'height: 64px' }
+  %div{ :class => 'drag', :id => 'newlessondiv' }
+    = haml :lesson, :locals => { :lesson => lesson, :rowclass => 'newlessonfield' }
