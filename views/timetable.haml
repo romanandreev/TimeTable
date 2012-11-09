@@ -71,6 +71,7 @@
         %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
         %input{ :type => 'submit', :class => 'SaveButton', :value => 'Сохранить в XML' }
+
     %div{ :id => 'drag' }
       %table{ :id => 'helpertable', :class => 'HelperTable' }
         %tbody
@@ -79,7 +80,7 @@
               Нажмите, чтобы создать новую пару
       - specs = ['sm', 'mm', 'sa']
       - specnames = ['СМ', 'ММ', 'САПР']
-
+      %div{ :class => 'empty'}
       %table{ :id => 'timetable', :class => 'TimeTable', :border => '1px' }
         %tbody
           %tr

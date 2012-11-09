@@ -94,7 +94,6 @@
 table.TimeTable {
 	width: 99%;
 	border-collapse: collapse;
-	top: 85px;
 	left: 0.5%;
 	position: relative;
 }
@@ -123,4 +122,11 @@ table.TimeTable {
 	background-color: #dfffdf;
 	border: solid 1px #848388;
 	z-index: 1;
+}
+
+.empty {
+	top: -1px;
+	left: -1px;
+	height: 80px;
+	width: 100%;
 }
