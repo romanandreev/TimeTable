@@ -23,11 +23,11 @@ timetable5 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/_courses/5cour
 
 newlesson = Lesson.new
 course = Course.new
-course.prof = 'пrеподаватель'
-course.name = 'название пrедмета'
+course.prof = 'Преподаватель'
+course.name = 'Название предмета'
 newlesson.fortnightly = nil
 newlesson.course = course
-newlesson.location = 'аудитоrия'
+newlesson.location = 'Аудитория'
 
 get '/3course' do
   @filename = '3course.xml'

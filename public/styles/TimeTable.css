@@ -105,6 +105,10 @@ table.TimeTable {
 	border-radius: 4px; /* Opera, Chrome */
 }
 
-.trash {
-	background-color: #FFDDDD
+.DeleteButton {
+	width :20px;
+	height :20px;
+	background-image: url(/images/cross.png);
+	background-position: center center;
+	border: solid 1px #848388
 }

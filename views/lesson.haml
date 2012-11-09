@@ -2,8 +2,8 @@
 %table{ :class => 'LessonTable' }
   %tbody
     %tr
-      %td{ :class => 'mark', :style => 'width:20px; padding-left:2px' }
-        %input{ :type => 'button', :value => 'Delete', :class => 'DeleteButton' }
+      %td{ :class => 'mark', :style => 'width:20px; padding-left:2px', :valign => 'bottom' }
+        %input{ :type => 'button', :class => 'DeleteButton' }
       %td{ :class => 'mark' }
         %div{ :class => "#{rowclass} name", :align => 'center' }
           = lesson.course.name
