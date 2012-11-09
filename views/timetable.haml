@@ -42,45 +42,44 @@
           return true;
         });
       });
+    %div{ :class => 'uppanel'}
+      %input{ :id => 'year', :class => 'YearSelector', :value => @timetable.year }
+        %label{ :for => 'year', :class => 'YearLabel' }
+          Год
+      %input{ :id => 'sem', :class => 'SemesterSelector', :value => @timetable.semester }
+        %label{ :for => 'sem', :class => 'SemesterLabel' }
+          Семестр
 
-    %input{ :id => 'year', :class => 'YearSelector', :value => @timetable.year }
-      %label{ :for => 'year', :class => 'YearLabel' }
-        Год
-    %input{ :id => 'sem', :class => 'SemesterSelector', :value => @timetable.semester }
-      %label{ :for => 'sem', :class => 'SemesterLabel' }
-        Семестр
+      %div{ :id => 'links', :class => 'CourseDiv' }
+        %div
+          %a{ :href => '3course', :class => 'CourseLink' }
+            3 курс
+        %div
+          %a{ :href => '4course', :class => 'CourseLink' }
+            4 курс
+        %div
+          %a{ :href => '5course', :class => 'CourseLink' }
+            5 курс
 
-    %div{ :id => 'links', :class => 'CourseDiv' }
-      %div
-        %a{ :href => '3course', :class => 'CourseLink' }
-          3 курс
-      %div
-        %a{ :href => '4course', :class => 'CourseLink' }
-          4 курс
-      %div
-        %a{ :href => '5course', :class => 'CourseLink' }
-          5 курс
+      %button{ :class => 'MergeButton', :onclick => 'REDIPS.table.merge();' }
+        Объединить ячейки
 
-    %button{ :class => 'MergeButton', :onclick => 'REDIPS.table.merge();' }
-      Merge
-
-    %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split();' }
-      Split
-
-    %div{ :id => 'drag' }
-      %table{ :id => 'helpertable', :class => 'HelperTable' }
-        %tbody
-          %tr
-            %td{ :style => 'height: 64px', :align => 'center', :id => 'newlesson', :class => 'mark'}
-              Нажмите, чтобы создать новую пару
+      %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split();' }
+        Разбить ячейки
 
       %form{ :class => 'SaveForm', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
         %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
-        %input{ :type => 'submit', :class => 'SaveButton', :value => 'Save to XML' }
-
+        %input{ :type => 'submit', :class => 'SaveButton', :value => 'Сохранить в XML' }
+    %div{ :id => 'drag' }
+      %table{ :id => 'helpertable', :class => 'HelperTable' }
+        %tbody
+          %tr
+            %td{ :style => 'height: 62px', :align => 'center', :id => 'newlesson', :class => 'mark'}
+              Нажмите, чтобы создать новую пару
       - specs = ['sm', 'mm', 'sa']
       - specnames = ['СМ', 'ММ', 'САПР']
+
       %table{ :id => 'timetable', :class => 'TimeTable', :border => '1px' }
         %tbody
           %tr
@@ -115,3 +114,4 @@
                     - unless dep_lesson.nil?
                       %div{ :class => 'drag' }
                         = haml :lesson, :locals => { :lesson => dep_lesson }
+      
