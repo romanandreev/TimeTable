@@ -102,7 +102,7 @@ table.TimeTable {
 .drag {
 	border: 1px dashed blue;
 	background-color: #eeeeff;
-	border-radius: 4px; /* Opera, Chrome */
+	border-radius: 8px; /* Opera, Chrome */
 }
 
 .DeleteButton {
@@ -110,5 +110,6 @@ table.TimeTable {
 	height :20px;
 	background-image: url(/images/cross.png);
 	background-position: center center;
-	border: solid 1px #848388
+	border: solid 1px #848388;
+	border-radius: 4px; /* Opera, Chrome */
 }

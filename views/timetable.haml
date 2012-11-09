@@ -84,20 +84,20 @@
       %table{ :id => 'timetable', :class => 'TimeTable', :border => '1px' }
         %tbody
           %tr
-            %th{ :width => '5%', :class => 'mark', :bgcolor => '#fffd73' }
+            %th{ :width => '2%', :class => 'mark', :bgcolor => '#ddddff' }
             - specnames.each do |name|
-              %td{ :bgcolor => '#DDDDFF', :align => 'center', :width => '33%', :class => 'mark' }
+              %td{ :bgcolor => '#ddddff', :align => 'center', :width => '33%', :class => 'mark' }
                 = name
           - @timetable.weekday_tables.each do |weekday|
             %tr
-              %th{ :class => 'mark', :bgcolor => '#fffd73' }
+              %th{ :class => 'mark', :bgcolor => '#ffffcd' }
 
-              %th{ :colspan => 3, :bgcolor => '#ffc073', :class => 'mark' }
+              %th{ :colspan => 3, :bgcolor => '#ffffcd', :class => 'mark' }
                 = weekday.name
 
             - 1.upto(5).each do |index|
               %tr{ :class => weekday.id }
-                %th{ :bgcolor => '#ffcd00', :style => 'height: 64px', :class => 'mark' }
+                %th{ :bgcolor => '#ffde00', :style => 'height: 64px', :class => 'mark' }
                   = index
 
                 - double_class = weekday.getDoubleClass(index)
