@@ -1,17 +1,17 @@
 - rowclass ||= 'editable'
-%table{ :class => 'LessonTable' }
-  %tbody
-    %tr
-      %td{ :class => 'mark', :style => 'width:20px; padding-left:2px', :valign => 'bottom' }
-        %input{ :type => 'button', :class => 'DeleteButton' }
-      %td{ :class => 'mark' }
-        %div{ :class => "#{rowclass} name", :align => 'center' }
-          = lesson.course.name
-        %div{ :class => "#{rowclass} prof", :align => 'center', :style => 'height:18px'  }
-          = lesson.course.prof
-        %div{ :class => "#{rowclass} loc", :align => 'center', :style => 'height:18px' }
-          = lesson.location
-      %td{ :style => 'width:20px; padding-right: 2px', :class => 'mark'}
-        %input{ :type => 'checkbox', :checked => lesson.numerator? }
-        %hr{ :size => 1}
-        %input{ :type => 'checkbox', :checked => lesson.denominator? }
+%div{:style => 'display: table; width: 100%; height: 100%'}
+  %div{ :style => 'display: table-cell; width: 20px; height: 100%; padding-left:2px; padding-bottom:2px; vertical-align: bottom;', :align => 'left' }
+    %input{ :type => 'button', :class => 'DeleteButton'}
+
+  %div{ :style => 'display: table-cell; height: 100%; vertical-align: middle;'}
+    %div{ :class => "#{rowclass} name", :align => 'center'}
+      = lesson.course.name
+    %div{ :class => "#{rowclass} prof", :align => 'center', :style => 'height:18px' }
+      = lesson.course.prof
+    %div{ :class => "#{rowclass} loc", :align => 'center', :style => 'height:18px' }
+      = lesson.location
+
+  %div{ :style => 'display: table-cell; width: 20px; height: 100%; padding-right:2px; vertical-align: middle;', :align => 'right' }
+    %input{ :type => 'checkbox', :checked => lesson.numerator? }
+    %hr{ :size => 1}
+    %input{ :type => 'checkbox', :checked => lesson.denominator? }
