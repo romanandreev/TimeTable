@@ -29,6 +29,19 @@ newlesson.fortnightly = nil
 newlesson.course = course
 newlesson.location = 'Аудитория'
 
+courselist = statmod.getAllCourses.map{|k, v| {k => v.values.map(&:name)}}.reduce(:merge)
+[timetable3, timetable4, timetable5].each do |timetable|
+  courselist[timetable.semester] += timetable.courseNames
+  courselist[timetable.semester].sort!
+  courselist[timetable.semester].uniq!
+end
+
+stafflist = statmod.getAllStaff
+
+require 'json'
+@@courselist_json = courselist.to_json
+@@stafflist_json = stafflist.persons.map(&:name).to_json
+
 get '/3course' do
   @filename = '3course.xml'
   @timetable = timetable3

@@ -6,14 +6,52 @@
     %script{ :src => '/js/redips-table-source.js' }
     %script{ :src => '/js/jquery-1.8.2.min.js'}
     %script{ :src => '/js/jquery.jeditable.mini.js'}
+    %script{ :src => '/js/jquery.autocomplete.js'}
     %script{ :src => '/js/underscore-min.js' }
     %script{ :src => '/js/createNewLesson.js' }
     %script{ :src => '/js/saveToXml.js' }
-    %link(rel="stylesheet" type="text/css" href="/styles/TimeTable.css")
-
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles/TimeTable.css'}
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles/jquery.autocomplete.css'}
 
     %body
     :javascript
+
+      function makeEditable(classname) {
+        $('.' + classname + '.loc').editable(function (value, settings) {
+          return(value);
+        }, { 
+             style: 'display: inline-block', 
+             data: function(str) { return $.trim(str); },
+             placeholder: ''
+           });
+
+        $('.' + classname + '.prof').editable(function (value, settings) {
+          return(value);
+        }, { 
+             type: 'autocomplete',
+             style: 'display: inline-block', 
+             data: function(str) { return $.trim(str); },
+             placeholder: '',
+             autocomplete: {
+               data: #{@@stafflist_json}
+             }
+           });
+
+        $('.' + classname + '.name').editable(function (value, settings) {
+          return(value);
+        }, {
+          type: 'autocomplete',
+          style: 'display: inline-block',
+          data: function(str) { return $.trim(str); },
+          placeholder: '',
+          autocomplete: {
+            data: courses[$("#sem").attr('value')]
+          }
+        });
+      }
+
+      courses = #{@@courselist_json};
+
       $(document).ready(function () {
 
         $(".DeleteButton").click(function() {
@@ -24,18 +62,19 @@
 
         REDIPS.drag.enable_table(false, 'LessonTable');
         REDIPS.drag.init();
-        REDIPS.drag.drop_option = 'single';
+        REDIPS.drag.drop_option = 'switch';
         REDIPS.table.mark_nonempty = false;
         REDIPS.table.color.cell = '#FFFFDD';
         REDIPS.table.onmousedown('timetable', true);
 
-        $('.editable').editable(function (value, settings) {
-          return(value);
-        }, { 
-             style: 'display: inline-block', 
-             data: function(str) { return $.trim(str); },
-             placeholder: ''
-           });
+        $.editable.addInputType('autocomplete', {
+          element: $.editable.types.text.element,
+          plugin: function(settings, original) {
+            $('input', this).autocomplete(settings.autocomplete.data, { matchContains: true});
+          }
+        });
+
+        makeEditable('editable');
 
         $('#xmlsaveform').submit(function() {
           $('#xmldata').val(getTimeTableXml());

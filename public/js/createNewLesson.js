@@ -10,11 +10,7 @@ function createNewLesson() {
 
         $("#newlessonEditor").find(".DeleteButton").click(restore);
 
-        $(".newlessonfield").editable(function(value, settings) { return value; },
-                   { style: 'display: inline-block', 
-                     data: function(str) { return $.trim(str); },
-                     placeholder: ''
-                   });
+        makeEditable('newlessonfield');
 
         REDIPS.drag.enable_drag(true, "newlessondiv");
         REDIPS.drag.myhandler_dropped = function(target_cell) {
