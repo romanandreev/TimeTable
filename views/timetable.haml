@@ -20,7 +20,7 @@
         $('.' + classname + '.loc').editable(function (value, settings) {
           return(value);
         }, { 
-             style: 'display: inline-block', 
+             style: 'display: inline-block',
              data: function(str) { return $.trim(str); },
              placeholder: ''
            });
@@ -80,7 +80,15 @@
           $('#xmldata').val(getTimeTableXml());
           return true;
         });
+
+        $('option').click(function ()
+        {
+          $(this).closest('form').submit();
+        });
+
+        $('.FileSelector').prop('selectedIndex', -1);
       });
+
     %div{ :class => 'uppanel'}
       %input{ :id => 'year', :class => 'YearSelector', :value => @timetable.year }
         %label{ :for => 'year', :class => 'YearLabel' }
@@ -89,24 +97,21 @@
         %label{ :for => 'sem', :class => 'SemesterLabel' }
           Семестр
 
-      %div{ :id => 'links', :class => 'CourseDiv' }
-        %div
-          %a{ :href => '3course', :class => 'CourseLink' }
-            3 курс
-        %div
-          %a{ :href => '4course', :class => 'CourseLink' }
-            4 курс
-        %div
-          %a{ :href => '5course', :class => 'CourseLink' }
-            5 курс
-
+      %form{ :action => '/loadfile', :method => 'post' }
+        %select{ :onchange => 'this.form.submit()', :name => 'filename', :class => 'FileSelector' }
+          - @@filenames.each do |fn|
+            - if fn == @filename
+              %option{ :value => fn, :selected => 'selected'}#{fn}
+            - else
+              %option{ :value => fn}#{fn}
+                                 
       %button{ :class => 'MergeButton', :onclick => 'REDIPS.table.merge();' }
         Объединить ячейки
 
       %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split();' }
         Разбить ячейки
 
-      %form{ :class => 'SaveForm', :action => 'save', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
+      %form{ :class => 'SaveForm', :action => '/download', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
         %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
         %input{ :type => 'submit', :class => 'SaveButton', :value => 'Сохранить в XML' }
@@ -136,7 +141,7 @@
 
             - 1.upto(5).each do |index|
               %tr{ :class => weekday.id }
-                %th{ :bgcolor => '#ffde00', :style => 'height: 60px', :class => 'mark' }
+                %th{ :bgcolor => '#f6956f', :style => 'height: 60px', :class => 'mark' }
                   = index
 
                 - double_class = weekday.getDoubleClass(index)

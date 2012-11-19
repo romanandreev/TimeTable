@@ -3,7 +3,7 @@
 require 'sinatra'
 require 'haml'
 
-set :environment, :production
+set :environment, :testing
 
 before do
   content_type :html, 'charset' => 'utf-8'
@@ -17,9 +17,9 @@ statmod.loadSpecData(File.dirname(__FILE__) + '/data/_courses/mm_spec.xml')
 statmod.loadSpecData(File.dirname(__FILE__) + '/data/_courses/sa_spec.xml')
 statmod.loadStaffData(File.dirname(__FILE__) + '/data/_staff/prof.xml')
 
-timetable3 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/_courses/3course.xml')
-timetable4 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/_courses/4course.xml')
-timetable5 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/_courses/5course.xml')
+timetable3 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/tables/3course.xml')
+timetable4 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/tables/4course.xml')
+timetable5 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/tables/5course.xml')
 
 newlesson = Lesson.new
 course = Course.new
@@ -41,6 +41,10 @@ stafflist = statmod.getAllStaff
 require 'json'
 @@courselist_json = courselist.to_json
 @@stafflist_json = stafflist.persons.map(&:name).to_json
+
+Dir.chdir 'data/tables' do
+  @@filenames = Dir["*.xml"]
+end
 
 get '/3course' do
   @filename = '3course.xml'
@@ -65,7 +69,7 @@ end
 
 get '/edit/:filename' do |fn|
   @filename = fn
-  @timetable = statmod.getTimeTable(File.dirname(__FILE__) + "/data/_courses/#{fn}") 
+  @timetable = statmod.getTimeTable(File.dirname(__FILE__) + "/data/tables/#{fn}") 
   @course = (@timetable.semester + 1) / 2;
   haml :timetable
 end
@@ -74,7 +78,17 @@ get '/' do
   redirect '/3course'
 end
 
+get '/new' do
+  @timetable = statmod.getTimeTable(File.dirname(__FILE__) + '/immutable_data/tables/empty.xml')
+  @course = 'какого'
+  haml :timetable
+end
+
 post '/save' do
+  
+end
+
+post '/download' do
   content_type 'application/octet-stream'
   attachment params[:filename]
   params[:xmldata]
@@ -82,4 +96,8 @@ end
 
 get '/newlesson' do
   @newlessonresponse ||= haml :newlesson, :locals => { :lesson => newlesson }
+end
+
+post '/loadfile' do
+  redirect "/edit/#{params['filename']}"
 end

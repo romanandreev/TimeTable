@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="timetable.xsl"?>
+<timetable>
+    <weekday id="mon" />
+    <weekday id="tue" />
+    <weekday id="wed" />
+    <weekday id="thu" />
+    <weekday id="fri" />
+    <weekday id="sat" />
+</timetable>
