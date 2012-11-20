@@ -22,7 +22,7 @@
 
 .SemesterLabel {
     position: fixed;
-    top: 33px;
+    top: 32px;
     left: 5px;
     width: 20px;
     text-align: left;
@@ -30,33 +30,41 @@
 
 .FileSelector {
     position: fixed;
-    top: 5px;
-    left: 200px;
+    top: 55px;
+    left: 80px;
+    width: 104px;
 }
 
-.CourseLink {
-
+.FileLabel {
+    position: fixed;
+    top: 55px;
+    left: 5px;
+    width: 20px;
+    text-align: left;
 }
+
 
 .MergeButton {
     position: fixed;
-    top: 2px;
-    left: 320px;
-    width: 200px
+    top: 5px;
+    left: 200px;
+    width: 100px;
+    height: 70px;
 }
 
 .SplitButton {
     position: fixed;
-    top: 27px;
-    left: 320px;
-    width: 200px
+    top: 5px;
+    left: 310px;
+    width: 100px;
+    height: 70px;
 }
 
 .HelperTable {
     position: fixed;
     top: 5px;
     width: 250px;
-    left: 550px;
+    left: 420px;
     border: 1px solid black;
     cursor: pointer;
     z-index: 1;
@@ -83,25 +91,33 @@
     width: 100%;
 }
 
+.DownloadButton {
+    position: fixed;
+    left: 680px;
+    top: 52px;
+    width: 285px;
+    z-index: 1;
+}
+
 .SaveButton {
     position: fixed;
     top: 2px;
-    left: 920px;
-    width: 100px;
+    left: 680px;
+    width: 120px;
 }
 
 .SaveFilename {
     position: fixed;
     top: 2px;
-    left: 1030px;
+    left: 810px;
     width: 150px;
 }
 
 .NewButton {
     position: fixed;
     top: 27px;
-    left: 820px;
-    width: 200px
+    left: 680px;
+    width: 285px
 }
 
 
@@ -112,30 +128,21 @@
     width: 250px
 }
 
-.DownloadButton {
-    position: fixed;
-    left: 320px;
-    top: 52px;
-    width: 200px;
-    z-index: 1;
-}
-
 table.TimeTable {
     width: 74%;
     border-collapse: collapse;
-    left: 0.5%;
+    left: 0.3%;
     position: relative;
 }
 
 .StackTableDiv {
     position: fixed;
-    top: 85px;
+    top: 88px;
+    bottom: 0px;
     width: 24%;
-    height: 80%;
-    /*border-collapse: collapse;*/
-    right: 0.5%;
-    /*style: 'float:right'; */
-    overflow-y: scroll;
+    right: 0.8%;
+    overflow-y: auto;
+    z-index: 1;
 }
 
 
@@ -175,7 +182,4 @@ table.StackTable {
     left: -1px;
     height: 80px;
     width: 100%;
-}
-
-input {
 }

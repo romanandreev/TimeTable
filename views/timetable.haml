@@ -106,10 +106,10 @@
     %div{ :class => 'uppanel'}
       %input{ :id => 'year', :class => 'YearSelector', :value => @timetable.year }
         %label{ :for => 'year', :class => 'YearLabel' }
-          Год
+          Год:
       %input{ :id => 'sem', :class => 'SemesterSelector', :value => @timetable.semester }
         %label{ :for => 'sem', :class => 'SemesterLabel' }
-          Семестр
+          Семестр:
 
       %form{ :action => '/loadfile', :method => 'post' }
         %select{ :onchange => 'this.form.submit()', :name => 'filename', :class => 'FileSelector' }
@@ -118,7 +118,9 @@
               %option{ :value => fn, :selected => 'selected'}#{fn}
             - else
               %option{ :value => fn}#{fn}
-                                 
+      %div{:class => 'FileLabel' }
+        Файл:
+
       %button{ :class => 'MergeButton', :onclick => 'REDIPS.table.merge();' }
         Объединить ячейки
 
@@ -148,9 +150,9 @@
       %div{ :class => 'StackTableDiv' }
         %table{ :id => 'stacktable', :class => 'StackTable', :border => '1px' }
           %tbody
-            - 10.times do
+            - 12.times do
               %tr
-                %td{ :style => 'height: 62px', :align => 'center' }
+                %td{ :style => 'height: 64px', :align => 'center' }
 
       - specs = ['sm', 'mm', 'sa']
       - specnames = ['СМ', 'ММ', 'САПР']
@@ -171,7 +173,7 @@
 
             - 1.upto(5).each do |index|
               %tr{ :class => weekday.id }
-                %th{ :bgcolor => '#f6956f', :style => 'height: 60px', :class => 'mark' }
+                %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :class => 'mark' }
                   = index
 
                 - double_class = weekday.getDoubleClass(index)
