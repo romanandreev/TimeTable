@@ -2,8 +2,9 @@
 
 require 'sinatra'
 require 'haml'
+require 'cgi'
 
-set :environment, :testing
+set :environment, :production
 
 before do
   content_type :html, 'charset' => 'utf-8'
@@ -17,9 +18,11 @@ statmod.loadSpecData(File.dirname(__FILE__) + '/data/_courses/mm_spec.xml')
 statmod.loadSpecData(File.dirname(__FILE__) + '/data/_courses/sa_spec.xml')
 statmod.loadStaffData(File.dirname(__FILE__) + '/data/_staff/prof.xml')
 
-timetable3 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/tables/3course.xml')
-timetable4 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/tables/4course.xml')
-timetable5 = statmod.getTimeTable(File.dirname(__FILE__) + '/data/tables/5course.xml')
+TABLE_DIR = File.dirname(__FILE__) + '/data/tables/'
+
+timetable3 = statmod.getTimeTable(TABLE_DIR + '3course.xml')
+timetable4 = statmod.getTimeTable(TABLE_DIR + '4course.xml')
+timetable5 = statmod.getTimeTable(TABLE_DIR + '5course.xml')
 
 newlesson = Lesson.new
 course = Course.new
@@ -42,7 +45,7 @@ require 'json'
 @@courselist_json = courselist.to_json
 @@stafflist_json = stafflist.persons.map(&:name).to_json
 
-Dir.chdir 'data/tables' do
+Dir.chdir TABLE_DIR do
   @@filenames = Dir["*.xml"]
 end
 
@@ -69,7 +72,7 @@ end
 
 get '/edit/:filename' do |fn|
   @filename = fn
-  @timetable = statmod.getTimeTable(File.dirname(__FILE__) + "/data/tables/#{fn}") 
+  @timetable = statmod.getTimeTable(File.dirname(__FILE__) + "/data/tables/#{CGI::unescape fn}") 
   @course = (@timetable.semester + 1) / 2;
   haml :timetable
 end
@@ -80,12 +83,15 @@ end
 
 get '/new' do
   @timetable = statmod.getTimeTable(File.dirname(__FILE__) + '/immutable_data/tables/empty.xml')
-  @course = 'какого'
+  @course = '?'
   haml :timetable
 end
 
 post '/save' do
-  
+  xml = params[:xmldata] 
+  fn = params[:filename]
+  File.write(TABLE_DIR + fn, xml)
+  redirect '/'
 end
 
 post '/download' do
@@ -99,5 +105,5 @@ get '/newlesson' do
 end
 
 post '/loadfile' do
-  redirect "/edit/#{params['filename']}"
+  redirect "/edit/#{CGI::escape params['filename']}"
 end

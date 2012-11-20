@@ -17,11 +17,18 @@
     :javascript
 
       function makeEditable(classname) {
+
+        var formStyle = 'display: inline-block; width:100%';
+        var inputHeight = '14px';
+        var inputWidth = '80%';
+
         $('.' + classname + '.loc').editable(function (value, settings) {
           return(value);
         }, { 
-             style: 'display: inline-block',
+             style: formStyle,
              data: function(str) { return $.trim(str); },
+             height: inputHeight,
+             width: inputWidth,
              placeholder: ''
            });
 
@@ -29,9 +36,11 @@
           return(value);
         }, { 
              type: 'autocomplete',
-             style: 'display: inline-block', 
+             style: formStyle,
              data: function(str) { return $.trim(str); },
              placeholder: '',
+             height: inputHeight,
+             width: inputWidth,
              autocomplete: {
                data: #{@@stafflist_json}
              }
@@ -41,9 +50,11 @@
           return(value);
         }, {
           type: 'autocomplete',
-          style: 'display: inline-block',
+          style: formStyle,
           data: function(str) { return $.trim(str); },
           placeholder: '',
+          height: inputHeight,
+          width: inputWidth,
           autocomplete: {
             data: courses[$("#sem").attr('value')]
           }
@@ -76,10 +87,13 @@
 
         makeEditable('editable');
 
-        $('#xmlsaveform').submit(function() {
-          $('#xmldata').val(getTimeTableXml());
+        function setXmlData() {
+          $('.xmldata').val(getTimeTableXml());
           return true;
-        });
+        }
+
+        $('#xmldownloadform').submit(setXmlData);
+        $('#xmlsaveform').submit(setXmlData);
 
         $('option').click(function ()
         {
@@ -111,10 +125,18 @@
       %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split();' }
         Разбить ячейки
 
-      %form{ :class => 'SaveForm', :action => '/download', :target => '_blank', :method => 'POST', :id => 'xmlsaveform' }
-        %input{ :type => 'hidden', :id => 'xmldata', :name => 'xmldata'}
+      %form{ :class => 'DownloadForm', :action => '/download', :target => '_blank', :method => 'POST', :id => 'xmldownloadform' }
+        %input{ :type => 'hidden', :class => 'xmldata', :name => 'xmldata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
-        %input{ :type => 'submit', :class => 'SaveButton', :value => 'Сохранить в XML' }
+        %input{ :type => 'submit', :class => 'DownloadButton', :value => 'Скачать XML' }
+            
+      %form{ :class => 'SaveForm', :action => '/save', :method => 'POST', :id => 'xmlsaveform' }
+        %input{ :type => 'hidden', :class => 'xmldata', :name => 'xmldata'}
+        %input{ :type => 'text', :name => 'filename', :value => @filename, :class => 'SaveFilename' }
+        %input{ :type => 'submit', :class => 'SaveButton', :value => 'Сохранить как' }
+
+      %form{ :class => 'NewForm', :action => '/new'}
+        %input{ :type => 'submit', :class => 'NewButton', :value => 'Создать новое расписание' }
 
     %div{ :id => 'drag' }
       %table{ :id => 'helpertable', :class => 'HelperTable' }
@@ -122,6 +144,14 @@
           %tr
             %td{ :style => 'height: 62px', :align => 'center', :id => 'newlesson', :class => 'mark'}
               Нажмите, чтобы создать новую пару
+
+      %div{ :class => 'StackTableDiv' }
+        %table{ :id => 'stacktable', :class => 'StackTable', :border => '1px' }
+          %tbody
+            - 10.times do
+              %tr
+                %td{ :style => 'height: 62px', :align => 'center' }
+
       - specs = ['sm', 'mm', 'sa']
       - specnames = ['СМ', 'ММ', 'САПР']
       %div{ :class => 'empty'}

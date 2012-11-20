@@ -71,11 +71,6 @@
     border: 1px solid black;
 }
 
-.LessonTable {
-    height: 100%;
-    width: 100%;
-}
-
 .SaveForm {
     position: fixed;
     top: 395px;
@@ -83,7 +78,41 @@
     width: 250px
 }
 
+.LessonTable {
+    height: 100%;
+    width: 100%;
+}
+
 .SaveButton {
+    position: fixed;
+    top: 2px;
+    left: 920px;
+    width: 100px;
+}
+
+.SaveFilename {
+    position: fixed;
+    top: 2px;
+    left: 1030px;
+    width: 150px;
+}
+
+.NewButton {
+    position: fixed;
+    top: 27px;
+    left: 820px;
+    width: 200px
+}
+
+
+.DownloadForm {
+    position: fixed;
+    top: 395px;
+    right: 5px;
+    width: 250px
+}
+
+.DownloadButton {
     position: fixed;
     left: 320px;
     top: 52px;
@@ -92,10 +121,27 @@
 }
 
 table.TimeTable {
-    width: 99%;
+    width: 74%;
     border-collapse: collapse;
     left: 0.5%;
     position: relative;
+}
+
+.StackTableDiv {
+    position: fixed;
+    top: 85px;
+    width: 24%;
+    height: 80%;
+    /*border-collapse: collapse;*/
+    right: 0.5%;
+    /*style: 'float:right'; */
+    overflow-y: scroll;
+}
+
+
+table.StackTable {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .drag {
@@ -131,8 +177,5 @@ table.TimeTable {
     width: 100%;
 }
 
-.EditField {  
-    display: inline-block;
-    /* width: 90%; */
-    height: 16px;
+input {
 }
