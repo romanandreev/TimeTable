@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'haml'
 require 'cgi'
+require 'set'
 
 set :environment, :production
 
@@ -46,7 +47,7 @@ require 'json'
 @@stafflist_json = stafflist.persons.map(&:name).to_json
 
 Dir.chdir TABLE_DIR do
-  @@filenames = Dir["*.xml"]
+  @@filenames = Set.new(Dir["*.xml"])
 end
 
 get '/3course' do
@@ -91,6 +92,7 @@ post '/save' do
   xml = params[:xmldata] 
   fn = params[:filename]
   File.write(TABLE_DIR + fn, xml)
+  @@filenames << fn
   redirect '/'
 end
 
