@@ -834,10 +834,23 @@ REDIPS.drag = (function () {
 				if (animated || !cloned) {
 					delete_srow();
 				}
+
+                if (table === table_source && REDIPS.drag.row_drop_option === 'switch') {
+                    if (r_row > row_source) {
+                        var tmp = ts.removeChild(tbl.rows[r_row - 1]);
+                        ts.insertBefore(tr, tbl.rows[r_row - 1]);
+                        ts.insertBefore(tmp, tbl.rows[row_source]);
+                    } else if (r_row < row_source) {
+                        var tmp = ts.removeChild(tbl.rows[r_row]);
+                        ts.insertBefore(tr, tbl.rows[r_row]);
+                        ts.insertBefore(tmp, tbl.rows[row_source]);
+                    }
+                    hr = tbl.rows[row_source];
+                }
 				// if row is not dropped to the last row position
-				if (r_row < tbl.rows.length) {
+                else if (r_row < tbl.rows.length) {
 					// insert row before (above) current row
-					if (table === table_source || REDIPS.drag.row_position === 'before') {
+                    if (table === table_source || REDIPS.drag.row_position === 'before') {
 						// insert row before current (highlighted) row
 						ts.insertBefore(tr, tbl.rows[r_row]);
 						// set reference to the highlighted row

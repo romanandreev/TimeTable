@@ -74,9 +74,20 @@
         REDIPS.drag.enable_table(false, 'LessonTable');
         REDIPS.drag.init();
         REDIPS.drag.drop_option = 'switch';
+        REDIPS.drag.row_drop_option = 'switch';
         REDIPS.table.mark_nonempty = false;
         REDIPS.table.color.cell = '#FFFFDD';
         REDIPS.table.onmousedown('timetable', true);
+
+        REDIPS.drag.myhandler_row_dropped = function(tr, dummy2, rowIndex) {
+          var table = $('.TimeTable')[0];
+          var src = $(tr.children[0].children[0]);
+          var dst = $(table.rows[rowIndex].children[0].children[0]);
+            
+          var tmp = src.text();
+          src.text(dst.text());
+          dst.text(tmp);
+        }
 
         $.editable.addInputType('autocomplete', {
           element: $.editable.types.text.element,
@@ -173,22 +184,22 @@
 
             - 1.upto(5).each do |index|
               %tr{ :class => weekday.id }
-                %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :class => 'mark' }
-                  = index
+                %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :class => 'rowhandler' }
+                  %div{ :class => 'drag row' }
+                    = index
 
                 - double_class = weekday.getDoubleClass(index)
                 - dep_lesson = if double_class.nil? then nil else double_class.getLessonForSpec 'all' end
                 - if dep_lesson.nil?
                   - specs.each do |spec|
-                    %td{ :class => 'lesson' }
+                    %td{ :class => 'single lesson' }
                       - unless double_class.nil?
                         - lesson = double_class.getLessonForSpec(spec)
                         - unless lesson.nil?
                           %div{ :class => 'drag' }
                             = haml :lesson, :locals => { :lesson => lesson }
                 - else
-                  %td{ :colspan => 3, :align => 'center', :class => 'lesson' }
+                  %td{ :colspan => 3, :align => 'center', :class => 'single lesson' }
                     - unless dep_lesson.nil?
                       %div{ :class => 'drag' }
                         = haml :lesson, :locals => { :lesson => dep_lesson }
-      
