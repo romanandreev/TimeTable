@@ -1,6 +1,6 @@
 source :rubyforge
 
-gem "nokogiri-happymapper", :require => "happymapper"
+gem "nokogiri-happymapper", "=0.5.6", :require => "happymapper"
 gem "sinatra"
 gem "haml"
 
