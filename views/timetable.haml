@@ -88,6 +88,10 @@
           src.text(dst.text());
           dst.text(tmp);
           makeEditable('editable');
+
+          $('.DeleteButton').click(function() {
+            $(this).parents(".drag").remove();
+          });
         }
 
         $.editable.addInputType('autocomplete', {
