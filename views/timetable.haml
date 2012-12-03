@@ -87,6 +87,7 @@
           var tmp = src.text();
           src.text(dst.text());
           dst.text(tmp);
+          makeEditable('editable');
         }
 
         $.editable.addInputType('autocomplete', {
