@@ -38,6 +38,7 @@ newlesson.location = 'Аудитория'
 courselist = statmod.getAllCourses.map{|k, v| {k => v.values.map(&:name)}}.reduce(:merge)
 [timetable3, timetable4, timetable5].each do |timetable|
   courselist[timetable.semester] += timetable.courseNames
+  courselist[timetable.semester] << ''
   courselist[timetable.semester].sort!
   courselist[timetable.semester].uniq!
 end
@@ -76,7 +77,11 @@ end
 get '/edit/:filename' do |fn|
   @filename = fn
   @timetable = statmod.getTimeTable(File.dirname(__FILE__) + "/data/tables/#{CGI::unescape fn}") 
-  @course = (@timetable.semester + 1) / 2;
+  if @timetable.semester.nil?
+    @course = ''
+  else
+    @course = (@timetable.semester + 1) / 2
+  end
   haml :timetable
 end
 
@@ -95,7 +100,7 @@ post '/save' do
   fn = params[:filename]
   File.write(TABLE_DIR + fn, xml)
   @@filenames << fn
-  redirect '/'
+  redirect "/edit/#{CGI::escape fn}"
 end
 
 post '/download' do
