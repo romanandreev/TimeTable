@@ -5,7 +5,11 @@ class TimeTable
     attribute :semester, Integer
 
     def course
-      (semester + 1) / 2
+      if semester.nil?
+        ''
+      else
+        (semester + 1) / 2
+      end
     end
 
     has_many :weekday_tables, WeekdayTable, :tag => 'weekday'

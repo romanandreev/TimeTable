@@ -56,32 +56,24 @@ end
 get '/3course' do
   @filename = '3course.xml'
   @timetable = timetable3
-  @course = 3
   haml :timetable
 end
 
 get '/4course' do
   @filename = '4course.xml'
   @timetable = timetable4
-  @course = 4
   haml :timetable
 end
 
 get '/5course' do
   @filename = '5course.xml'
   @timetable = timetable5
-  @course = 5
   haml :timetable
 end
 
 get '/edit/:filename' do |fn|
   @filename = fn
   @timetable = statmod.getTimeTable(File.dirname(__FILE__) + "/data/tables/#{CGI::unescape fn}") 
-  if @timetable.semester.nil?
-    @course = ''
-  else
-    @course = (@timetable.semester + 1) / 2
-  end
   haml :timetable
 end
 
@@ -91,8 +83,19 @@ end
 
 get '/new' do
   @timetable = statmod.getTimeTable(File.dirname(__FILE__) + '/immutable_data/tables/empty.xml')
-  @course = '?'
   haml :timetable
+end
+
+post '/renderjson' do
+  json = params[:jsondata]
+  if json then
+    begin
+      @timetable = statmod.jsonToTimetable(json)
+    rescue
+      return 'invalid JSON'
+    end
+    haml :timetable
+  end
 end
 
 post '/save' do

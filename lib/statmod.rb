@@ -1,5 +1,7 @@
 require_relative './timetable.rb'
 
+require 'json'
+
 # The class responsible for gluing together information from different XML files
 class Statmod
 
@@ -43,5 +45,37 @@ class Statmod
   # map: id -> person information
   def getAllStaff
     @staff
+  end
+
+  def jsonToTimetable(hash)
+    json = hash
+    timetable = TimeTable.new
+    timetable.year = json['year'].to_i
+    timetable.semester = json['semester'].to_i
+    timetable.weekday_tables = []
+    
+    json['weekdays'].each do |id, classes|
+      wd_table = WeekdayTable.new
+      wd_table.id = id
+      wd_table.double_classes = []
+      classes.each do |index, lessons|
+        double_class = DoubleClass.new
+        double_class.index = index.to_i
+        double_class.lessons = []
+        lessons.each do |spec, lesson_json|
+          lesson = Lesson.new
+          lesson.spec = spec
+          lesson.location = lesson_json['location']
+          lesson.fortnightly = lesson_json['fortnightly']
+          lesson.course = Course.new
+          lesson.course.name = lesson_json['course']['name']
+          lesson.course.prof = lesson_json['course']['prof']
+          double_class.lessons << lesson
+        end
+        wd_table.double_classes << double_class
+      end
+      timetable.weekday_tables << wd_table
+    end
+    timetable
   end
 end
