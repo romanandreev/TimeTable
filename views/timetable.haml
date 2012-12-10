@@ -9,7 +9,6 @@
     %script{ :src => '/js/jquery.autocomplete.js'}
     %script{ :src => '/js/underscore-min.js' }
     %script{ :src => '/js/createNewLesson.js' }
-    %script{ :src => '/js/saveToXml.js' }
     %script{ :src => '/js/get_timetable_json.js' }
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles/TimeTable.css'}
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles/jquery.autocomplete.css'}
@@ -108,13 +107,13 @@
 
         makeEditable('editable');
 
-        function setXmlData() {
-          $('.xmldata').val(getTimeTableXml());
+        function setJsonData() {
+          $('.jsondata').val(JSON.stringify(window.getTimeTableJson()));
           return true;
         }
 
-        $('#xmldownloadform').submit(setXmlData);
-        $('#xmlsaveform').submit(setXmlData);
+        $('#xmldownloadform').submit(setJsonData);
+        $('#xmlsaveform').submit(setJsonData);
 
         $('option').click(function ()
         {
@@ -149,12 +148,12 @@
         Разбить ячейки
 
       %form{ :class => 'DownloadForm', :action => '/download', :target => '_blank', :method => 'POST', :id => 'xmldownloadform' }
-        %input{ :type => 'hidden', :class => 'xmldata', :name => 'xmldata'}
+        %input{ :type => 'hidden', :class => 'jsondata', :name => 'jsondata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
         %input{ :type => 'submit', :class => 'DownloadButton', :value => 'Скачать XML' }
             
       %form{ :class => 'SaveForm', :action => '/save', :method => 'POST', :id => 'xmlsaveform' }
-        %input{ :type => 'hidden', :class => 'xmldata', :name => 'xmldata'}
+        %input{ :type => 'hidden', :class => 'jsondata', :name => 'jsondata'}
         %input{ :type => 'text', :name => 'filename', :value => @filename, :class => 'SaveFilename' }
         %input{ :type => 'submit', :class => 'SaveButton', :value => 'Сохранить как' }
 

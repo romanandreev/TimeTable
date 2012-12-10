@@ -49,6 +49,7 @@ class Statmod
 
   def jsonToTimetable(hash)
     json = hash
+    p json
     timetable = TimeTable.new
     timetable.year = json['year'].to_i
     timetable.semester = json['semester'].to_i

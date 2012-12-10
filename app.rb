@@ -99,11 +99,18 @@ post '/renderjson' do
 end
 
 post '/save' do
-  xml = params[:xmldata] 
-  fn = params[:filename]
-  File.write(TABLE_DIR + fn, xml)
-  @@filenames << fn
-  redirect "/edit/#{CGI::escape fn}"
+  p params
+  json = JSON.parse params[:jsondata] 
+  begin
+    timetable = statmod.jsonToTimetable json
+    fn = params[:filename]
+    xml = timetable.to_xml
+    File.write(TABLE_DIR + fn, xml)
+    @@filenames << fn
+    redirect "/edit/#{CGI::escape fn}"
+  rescue
+    "Ошибка сохранения XML-файла"
+  end
 end
 
 post '/download' do
