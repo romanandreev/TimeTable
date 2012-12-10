@@ -99,13 +99,17 @@ post '/renderjson' do
 end
 
 post '/save' do
-  p params
   json = JSON.parse params[:jsondata] 
   begin
     timetable = statmod.jsonToTimetable json
     fn = params[:filename]
-    xml = timetable.to_xml
-    File.write(TABLE_DIR + fn, xml)
+    builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8')
+    pi = Nokogiri::XML::ProcessingInstruction.new(builder.doc, 
+                                                 'xml-stylesheet',
+                                                 'type="text/xsl" href="timetable.xsl"')
+    timetable.to_xml(builder)
+    builder.doc.root.add_previous_sibling pi
+    File.write(TABLE_DIR + fn, builder.to_xml(:indent => 4))
     @@filenames << fn
     redirect "/edit/#{CGI::escape fn}"
   rescue
