@@ -73,11 +73,10 @@
         $("#newlesson").one("click", createNewLesson);
 
         REDIPS.drag.init();
-        //REDIPS.drag.enable_table(true, 'LessonTable');
+        REDIPS.drag.enable_table(false, 'LessonTable');
         REDIPS.drag.drop_option = 'switch';
-        //REDIPS.drag.row_drop_option = 'switch';
         REDIPS.table.mark_nonempty = false;
-        REDIPS.table.color.cell = '#DDDDAA';
+        REDIPS.table.color.cell = '#AADDAA';
         REDIPS.table.onmousedown('timetable', true);
 
         // @@@BUGGY@@@
@@ -203,14 +202,14 @@
                 - dep_lesson = if double_class.nil? then nil else double_class.getLessonForSpec 'all' end
                 - if dep_lesson.nil?
                   - specs.each do |spec|
-                    %td{ :class => 'single lesson' }
+                    %td{ :class => 'lesson' }
                       - unless double_class.nil?
                         - lesson = double_class.getLessonForSpec(spec)
                         - unless lesson.nil?
                           %div{ :class => 'drag' }
                             = haml :lesson, :locals => { :lesson => lesson }
                 - else
-                  %td{ :colspan => 3, :align => 'center', :class => 'single lesson' }
+                  %td{ :colspan => 3, :align => 'center', :class => 'lesson' }
                     - unless dep_lesson.nil?
                       %div{ :class => 'drag' }
                         = haml :lesson, :locals => { :lesson => dep_lesson }
