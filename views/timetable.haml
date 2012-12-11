@@ -72,8 +72,8 @@
 
         $("#newlesson").one("click", createNewLesson);
 
-        REDIPS.drag.enable_table(false, 'LessonTable');
         REDIPS.drag.init();
+        //REDIPS.drag.enable_table(true, 'LessonTable');
         REDIPS.drag.drop_option = 'switch';
         //REDIPS.drag.row_drop_option = 'switch';
         REDIPS.table.mark_nonempty = false;
@@ -195,8 +195,8 @@
 
             - 1.upto(5).each do |index|
               %tr{ :class => weekday.id }
-                %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :class => 'rowhandler' }
-                  %div{ :class => 'drag row' }
+                %th{ :bgcolor => '#f6956f', :style => 'height: 64px'}
+                  %div{ :class => 'row' }
                     = index
 
                 - double_class = weekday.getDoubleClass(index)
