@@ -49,7 +49,6 @@ class Statmod
 
   def jsonToTimetable(hash)
     json = hash
-    p json
     timetable = TimeTable.new
     timetable.year = json['year'].to_i
     timetable.semester = json['semester'].to_i
@@ -79,5 +78,14 @@ class Statmod
       timetable.weekday_tables << wd_table
     end
     timetable
+  end
+
+  def getCourseInfo(semester, id)
+    semester = semester.to_i
+    if @courses[semester].nil?
+      nil
+    else
+      @courses[semester][id]
+    end
   end
 end

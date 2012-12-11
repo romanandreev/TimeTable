@@ -35,6 +35,10 @@ newlesson.fortnightly = nil
 newlesson.course = course
 newlesson.location = 'Аудитория'
 
+# map: semester -> course ids
+courseidlist = statmod.getAllCourses.map{|k, v| {k => v.keys}}.reduce(:merge)
+
+# map: semester -> course names
 courselist = statmod.getAllCourses.map{|k, v| {k => v.values.map(&:name)}}.reduce(:merge)
 [timetable3, timetable4, timetable5].each do |timetable|
   courselist[timetable.semester] += timetable.courseNames
@@ -46,6 +50,7 @@ end
 stafflist = statmod.getAllStaff
 
 require 'json'
+@@courseidlist_json = courseidlist.to_json
 @@courselist_json = courselist.to_json
 @@stafflist_json = stafflist.persons.map(&:name).to_json
 
@@ -78,7 +83,7 @@ get '/edit/:filename' do |fn|
 end
 
 get '/' do
-  redirect '/3course'
+  redirect "/#{3 + (rand 3)}course"
 end
 
 get '/new' do
@@ -125,6 +130,18 @@ end
 
 get '/newlesson' do
   @newlessonresponse ||= haml :newlesson, :locals => { :lesson => newlesson }
+end
+
+get '/newlesson/:semester/:courseid' do |semester, id|
+  lesson = Lesson.new
+  lesson.course = Course.new
+  lesson.course.id = id
+  courseinfo = statmod.getCourseInfo semester, id
+  unless course.nil?
+    lesson.course.name = courseinfo.name
+    lesson.course.prof = courseinfo.instructor.name
+  end
+  @newlessonresponse ||= haml :newlesson, :locals => { :lesson => lesson }
 end
 
 post '/loadfile' do

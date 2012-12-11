@@ -8,6 +8,7 @@
       %div{ :class => 'fixed name', :align => 'center' }
         = lesson.course.name
       %div{ :class => 'fixed prof', :align => 'center' }
+        = lesson.course.prof
       %input{ :class => 'lessonid', :type => 'hidden', :value => lesson.course.id }
     - else 
       %div{ :class => "#{rowclass} name", :align => 'center' }
