@@ -4,10 +4,10 @@
   window.getTimeTableJson = function() {
     var getAttr, getLessonJson, getRowJson, getWeekdayJson, wd, weekdays, _i, _len, _ref;
     getAttr = function(lesson, attr) {
-      return lesson.row.find(attr).text().trim();
+      return $(lesson.cell).find(attr).text().trim();
     };
     getLessonJson = function(lesson) {
-      var checkboxes, fortnightly, json;
+      var checkboxes, fortnightly, id, json;
       json = {
         course: {
           name: getAttr(lesson, '.name'),
@@ -15,7 +15,11 @@
         },
         location: getAttr(lesson, '.loc')
       };
-      checkboxes = lesson.row.find("input[type=checkbox]");
+      id = $(lesson.cell).find('.lessonid')[0];
+      if (id != null) {
+        json.course.id = $(id).attr('value');
+      }
+      checkboxes = $(lesson.cell).find("input[type=checkbox]");
       fortnightly = 0;
       if ($(checkboxes[0]).attr('checked') === 'checked') {
         fortnightly += 1;
@@ -32,35 +36,26 @@
       };
     };
     getRowJson = function(row) {
-      var all_lessons, c, cols, json, l, lesson, lessons, result, _i, _len, _ref;
-      cols = (function() {
-        var _i, _len, _ref, _results;
-        _ref = $(row).find('td.lesson');
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          c = _ref[_i];
-          _results.push($(c));
-        }
-        return _results;
-      })();
+      var all_lessons, cols, json, l, lesson, lessons, result, _i, _len, _ref;
+      cols = $(row).find('td.lesson');
       all_lessons = [];
       if (cols.length === 1) {
         all_lessons = [
           {
-            row: cols[0],
+            cell: cols[0],
             spec: 'all'
           }
         ];
       } else {
         all_lessons = [
           {
-            row: cols[0],
+            cell: cols[0],
             spec: 'sm'
           }, {
-            row: cols[1],
+            cell: cols[1],
             spec: 'mm'
           }, {
-            row: cols[2],
+            cell: cols[2],
             spec: 'sa'
           }
         ];
@@ -70,7 +65,7 @@
         _results = [];
         for (_i = 0, _len = all_lessons.length; _i < _len; _i++) {
           l = all_lessons[_i];
-          if ($(l.row).text().trim().length > 0) {
+          if ($(l.cell).text().trim().length > 0) {
             _results.push(l);
           }
         }

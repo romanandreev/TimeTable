@@ -158,8 +158,8 @@ table.StackTable {
 }
 
 .DeleteButton {
-    width :20px;
-    height :20px;
+    width: 20px;
+    height: 20px;
     background-image: url(/images/cross.png);
     background-position: center center;
     border: solid 1px #848388;
@@ -182,4 +182,19 @@ table.StackTable {
     left: -1px;
     height: 80px;
     width: 100%;
+}
+
+div.name {
+}
+
+div.prof {
+    height: 20px;
+}
+
+div.loc {
+    height: 20px;
+}
+
+div.fixed {
+    background-color: #0bffce;
 }

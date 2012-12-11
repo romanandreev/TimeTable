@@ -71,6 +71,7 @@ class Statmod
           lesson.course = Course.new
           lesson.course.name = lesson_json['course']['name']
           lesson.course.prof = lesson_json['course']['prof']
+          lesson.course.id = lesson_json['course']['id']
           double_class.lessons << lesson
         end
         wd_table.double_classes << double_class
