@@ -2,7 +2,7 @@
 %html
   %head
     %title Расписание #{@timetable.course.to_s}-го курса СтатМода
-    %script{ :src => '/js/redips-drag-source.js' }
+    %script{ :src => '/js/redips-drag-min.js' }
     %script{ :src => '/js/redips-table-source.js' }
     %script{ :src => '/js/jquery-1.8.2.min.js'}
     %script{ :src => '/js/jquery.jeditable.mini.js'}
@@ -73,31 +73,12 @@
         $("#newlesson").one("click", createNewLesson);
 
         REDIPS.drag.init();
-        REDIPS.drag.enable_table(false, 'LessonTable');
-        REDIPS.drag.drop_option = 'switch';
+        REDIPS.drag.enableTable(false, 'LessonTable');
+        REDIPS.drag.dropMode = 'switch';
+        REDIPS.drag.rowDropMode = 'switch';
         REDIPS.table.mark_nonempty = false;
         REDIPS.table.color.cell = '#AADDAA';
         REDIPS.table.onmousedown('timetable', true);
-
-        // @@@BUGGY@@@
-        // (author of REDIPS.drag said that he will try to deliver 
-        // row swap functionality in the next release...)
-        REDIPS.drag.myhandler_row_dropped = function(tr, dummy2, rowIndex) {
-          /*
-          var table = $('.TimeTable')[0];
-          var src = $(tr.children[0].children[0]);
-          var dst = $(table.rows[rowIndex].children[0].children[0]);
-            
-          var tmp = src.text();
-          src.text(dst.text());
-          dst.text(tmp);
-          makeEditable('editable');
-
-          $('.DeleteButton').click(function() {
-            $(this).parents(".drag").remove();
-          });
-          */
-        }
 
         $.editable.addInputType('autocomplete', {
           element: $.editable.types.text.element,
@@ -194,8 +175,8 @@
 
             - 1.upto(5).each do |index|
               %tr{ :class => weekday.id }
-                %th{ :bgcolor => '#f6956f', :style => 'height: 64px'}
-                  %div{ :class => 'row' }
+                %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :class => 'rowhandler' }
+                  %div{ :class => 'row drag' }
                     = index
 
                 - double_class = weekday.getDoubleClass(index)
