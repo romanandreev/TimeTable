@@ -12,8 +12,8 @@ function createNewLesson() {
 
         makeEditable('newlessonfield');
 
-        REDIPS.drag.enable_drag(true, "newlessondiv");
-        REDIPS.drag.myhandler_dropped = function(target_cell) {
+        REDIPS.drag.enableDrag(true, "#newlessondiv");
+        REDIPS.drag.event.dropped = function(target_cell) {
             if ($(REDIPS.drag.obj).attr('id') == 'newlessondiv' && $(target_cell).attr('id') != 'newlessonEditor') {
                 restore();
                 $(REDIPS.drag.obj).find(".DeleteButton").unbind('click').click(function() {

@@ -75,7 +75,7 @@
         REDIPS.drag.init();
         REDIPS.drag.enableTable(false, 'LessonTable');
         REDIPS.drag.dropMode = 'switch';
-        REDIPS.drag.rowDropMode = 'switch';
+        // REDIPS.drag.rowDropMode = 'switch';
         REDIPS.table.mark_nonempty = false;
         REDIPS.table.color.cell = '#AADDAA';
         REDIPS.table.onmousedown('timetable', true);
@@ -175,8 +175,8 @@
 
             - 1.upto(5).each do |index|
               %tr{ :class => weekday.id }
-                %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :class => 'rowhandler' }
-                  %div{ :class => 'row drag' }
+                %th{ :bgcolor => '#f6956f', :style => 'height: 64px' }
+                  %div{ :class => 'row' }
                     = index
 
                 - double_class = weekday.getDoubleClass(index)
