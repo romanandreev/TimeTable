@@ -157,6 +157,7 @@ table.StackTable {
     border-radius: 8px; /* Opera, Chrome */
 }
 
+.ClearDayButton,
 .DeleteButton {
     width: 20px;
     height: 20px;

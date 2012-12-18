@@ -184,6 +184,8 @@
           - @timetable.weekday_tables.each do |weekday|
             %tr
               %th{ :class => 'mark', :bgcolor => '#ffffcd' }
+                %input{ :type => 'button', :class => 'ClearDayButton', :style => 'cursor:pointer',
+                        :onclick => "$('tr.#{weekday.id}').find('td').html('')" }
 
               %th{ :colspan => 3, :bgcolor => '#ffffcd', :class => 'mark' }
                 = weekday.name
