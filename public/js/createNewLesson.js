@@ -5,6 +5,7 @@ function replaceNewLessonTdWith(ajax_request) {
         var restore = function() {
             $("#newlessonEditor").replaceWith(oldContent);
             $("#newlesson").one("click", createNewLesson);
+            $("#courseIds").prop('disabled', false);
         };
 
         $("#newlessonEditor").find(".DeleteButton").click(restore);
@@ -33,4 +34,7 @@ function createNewLessonFromId() {
     semester = $("#sem").attr('value');
 
     replaceNewLessonTdWith($.get("/newlesson/" + semester + "/" + id));
+
+    $('#courseIds').prop('selectedIndex', -1);
+    $("#courseIds").prop('disabled', 'disabled');
 }

@@ -212,7 +212,6 @@ div.fixed {
     position: fixed;
     top: 32px;
     left: 980px;
-    width: 200px;
+    width: 400px;
     text-align: left;
 }
-

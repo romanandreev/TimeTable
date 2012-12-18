@@ -36,8 +36,10 @@ newlesson.fortnightly = nil
 newlesson.course = course
 newlesson.location = 'Аудитория'
 
+all_courses = statmod.getAllCourses
+
 # map: semester -> course ids
-courseidlist = statmod.getAllCourses.map{|k, v| {k => v.keys}}.reduce(:merge)
+courseidlist = all_courses.map{|k, v| {k => v.keys}}.reduce(:merge)
 
 # map: semester -> course names
 courselist = statmod.getAllCourses.map{|k, v| {k => v.values.map(&:name)}}.reduce(:merge)
@@ -51,7 +53,7 @@ end
 stafflist = statmod.getAllStaff
 
 require 'json'
-@@courseidlist_json = courseidlist.map{|k, v| {k => optionsToHtml(v)}}.reduce(:merge).to_json
+@@courseidlist_json = courseidlist.map{|k, v| {k => optionsToHtml(v, all_courses[k])}}.reduce(:merge).to_json
 @@courselist_json = courselist.to_json
 @@stafflist_json = stafflist.persons.map(&:name).to_json
 
