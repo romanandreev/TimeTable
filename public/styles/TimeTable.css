@@ -198,3 +198,20 @@ div.loc {
 div.fixed {
     background-color: #0bffce;
 }
+
+#courseIdsLabel {
+    position: fixed;
+    top: 8px;
+    height: 10px;
+    left: 980px;
+    text-align: left;
+}
+
+#courseIds {
+    position: fixed;
+    top: 32px;
+    left: 980px;
+    width: 200px;
+    text-align: left;
+}
+

@@ -1,6 +1,5 @@
-function createNewLesson() {
-
-    $.get("/newlesson").done(function(result) {
+function replaceNewLessonTdWith(ajax_request) {
+    ajax_request.done(function(result) {
         var oldContent = $("#newlesson").replaceWith(result);
 
         var restore = function() {
@@ -23,4 +22,15 @@ function createNewLesson() {
         };
 
     });
+}
+
+function createNewLesson() {
+    replaceNewLessonTdWith($.get("/newlesson"));
+}
+
+function createNewLessonFromId() {
+    id = $($("#courseIds")[0].selectedOptions).attr('value');
+    semester = $("#sem").attr('value');
+
+    replaceNewLessonTdWith($.get("/newlesson/" + semester + "/" + id));
 }

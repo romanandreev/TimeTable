@@ -14,6 +14,7 @@ before do
 end
 
 require_relative 'lib/statmod.rb'
+require_relative 'lib/id_select_option_gen.rb'
 
 statmod = Statmod.new
 statmod.loadSpecData(File.dirname(__FILE__) + '/data/_courses/sm_spec.xml')
@@ -50,7 +51,7 @@ end
 stafflist = statmod.getAllStaff
 
 require 'json'
-@@courseidlist_json = courseidlist.to_json
+@@courseidlist_json = courseidlist.map{|k, v| {k => optionsToHtml(v)}}.reduce(:merge).to_json
 @@courselist_json = courselist.to_json
 @@stafflist_json = stafflist.persons.map(&:name).to_json
 

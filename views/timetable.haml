@@ -103,6 +103,16 @@
         });
 
         $('.FileSelector').prop('selectedIndex', -1);
+
+        function updateCourseIdentifiers() {
+          $('#courseIds').html(course_ids[$("#sem").attr('value')]);
+        }
+
+        $('#sem').change(function() {
+          updateCourseIdentifiers(); 
+        });
+
+        updateCourseIdentifiers();
       });
 
     %div{ :class => 'uppanel'}
@@ -141,6 +151,11 @@
 
       %form{ :class => 'NewForm', :action => '/new'}
         %input{ :type => 'submit', :class => 'NewButton', :value => 'Создать новое расписание' }
+
+      %form{ :id => 'NewFromIdForm' }
+        %label{ :id => 'courseIdsLabel' }
+          Создать пару по идентификатору
+        %select{ :onchange => 'createNewLessonFromId()', :id => 'courseIds' }
 
     %div{ :id => 'drag' }
       %table{ :id => 'helpertable', :class => 'HelperTable' }
