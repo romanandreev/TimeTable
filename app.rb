@@ -13,6 +13,13 @@ before do
   content_type :html, 'charset' => 'utf-8'
 end
 
+@@specs = ['sa', 'sm', 'mm']
+@@specnames = ['САПР', 'СМ', 'ММ']
+
+def rowSpan(l)
+  if l.nil? or not l.fortnightly.nil? then 1 else 2 end
+end
+
 require_relative 'lib/statmod.rb'
 require_relative 'lib/id_select_option_gen.rb'
 

@@ -173,14 +173,12 @@
               %tr
                 %td{ :style => 'height: 64px', :align => 'center' }
 
-      - specs = ['sm', 'mm', 'sa']
-      - specnames = ['СМ', 'ММ', 'САПР']
       %div{ :class => 'empty'}
       %table{ :id => 'timetable', :class => 'TimeTable', :border => '1px' }
         %tbody
           %tr
             %th{ :width => '2%', :class => 'mark', :bgcolor => '#ddddff' }
-            - specnames.each do |name|
+            - @@specnames.each do |name|
               %td{ :bgcolor => '#ddddff', :align => 'center', :width => '33%', :class => 'mark' }
                 = name
           - @timetable.weekday_tables.each do |weekday|
@@ -193,23 +191,14 @@
                 = weekday.name
 
             - 1.upto(5).each do |index|
-              %tr{ :class => weekday.id }
-                %th{ :bgcolor => '#f6956f', :style => 'height: 64px' }
+              %tr{ :class => weekday.id, :style => 'height: 50px' }
+                %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :rowspan => 2}
                   %div{ :class => 'row' }
                     = index
-
+                
                 - double_class = weekday.getDoubleClass(index)
-                - dep_lesson = if double_class.nil? then nil else double_class.getLessonForSpec 'all' end
-                - if dep_lesson.nil?
-                  - specs.each do |spec|
-                    %td{ :class => 'lesson' }
-                      - unless double_class.nil?
-                        - lesson = double_class.getLessonForSpec(spec)
-                        - unless lesson.nil?
-                          %div{ :class => 'drag' }
-                            = haml :lesson, :locals => { :lesson => lesson }
-                - else
-                  %td{ :colspan => 3, :align => 'center', :class => 'lesson' }
-                    - unless dep_lesson.nil?
-                      %div{ :class => 'drag' }
-                        = haml :lesson, :locals => { :lesson => dep_lesson }
+                = haml :top_halfrow, :locals => { :lessons => double_class.topLessons }
+              %tr{ :class => weekday.id, :style => 'height: 50px' }
+                - specs_to_skip = double_class.topLessons.select{|k,v| v.denominator? }.keys
+                = haml :bottom_halfrow, :locals => { :lessons => double_class.bottomLessons,
+                                                     :skip => Set.new(specs_to_skip) }

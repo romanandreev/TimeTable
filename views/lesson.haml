@@ -17,8 +17,3 @@
         = lesson.course.prof
     %div{ :class => "#{rowclass} loc", :align => 'center' }
       = lesson.location
-
-  %div{ :style => 'display: table-cell; width: 20px; height: 100%; padding-right:2px; vertical-align: middle;', :align => 'right' }
-    %input{ :type => 'checkbox', :checked => lesson.numerator? }
-    %hr{ :size => 1}
-    %input{ :type => 'checkbox', :checked => lesson.denominator? }
