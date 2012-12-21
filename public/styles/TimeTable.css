@@ -52,19 +52,33 @@
     height: 70px;
 }
 
-#SplitButton {
+#SplitButtonsLabel,
+#SplitButtonH,
+#SplitButtonV {
     position: fixed;
-    top: 5px;
     left: 310px;
-    width: 100px;
-    height: 70px;
+    width: 150px;
+    height: 20px;
+}
+
+#SplitButtonsLabel {
+    top: 5px;
+    text-align: center;
+}
+
+#SplitButtonH {
+    top: 30px;
+}
+
+#SplitButtonV {
+    top: 55px;
 }
 
 #helpertable {
     position: fixed;
     top: 5px;
     width: 250px;
-    left: 420px;
+    left: 470px;
     border: 1px solid black;
     cursor: pointer;
     z-index: 1;
@@ -75,7 +89,7 @@
     position: fixed;
     top: 2px;
     width: 250px;
-    left: 550px;
+    left: 610px;
     border: 1px solid black;
 }
 
@@ -93,7 +107,7 @@
 
 #DownloadButton {
     position: fixed;
-    left: 680px;
+    left: 730px;
     top: 52px;
     width: 285px;
     z-index: 1;
@@ -102,21 +116,21 @@
 #SaveButton {
     position: fixed;
     top: 2px;
-    left: 680px;
+    left: 730px;
     width: 120px;
 }
 
 #SaveFilename {
     position: fixed;
     top: 2px;
-    left: 810px;
+    left: 860px;
     width: 150px;
 }
 
 #NewButton {
     position: fixed;
     top: 27px;
-    left: 680px;
+    left: 730px;
     width: 285px
 }
 
@@ -204,14 +218,14 @@ div.fixed {
     position: fixed;
     top: 8px;
     height: 10px;
-    left: 980px;
+    left: 1030px;
     text-align: left;
 }
 
 #courseIds {
     position: fixed;
     top: 32px;
-    left: 980px;
+    left: 1030px;
     width: 400px;
     text-align: left;
 }
