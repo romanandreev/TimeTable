@@ -122,42 +122,42 @@
         $('#courseIds').prop('selectedIndex', -1);
       });
 
-    %div{ :class => 'uppanel'}
-      %input{ :id => 'year', :class => 'YearSelector', :value => @timetable.year }
-        %label{ :for => 'year', :class => 'YearLabel' }
+    %div{ :id => 'uppanel'}
+      %input{ :id => 'year', :value => @timetable.year }
+        %label{ :for => 'year', :id => 'YearLabel' }
           Год:
-      %input{ :id => 'sem', :class => 'SemesterSelector', :value => @timetable.semester }
-        %label{ :for => 'sem', :class => 'SemesterLabel' }
+      %input{ :id => 'sem', :value => @timetable.semester }
+        %label{ :for => 'sem', :id => 'SemesterLabel' }
           Семестр:
 
       %form{ :action => '/loadfile', :method => 'post' }
-        %select{ :onchange => 'this.form.submit()', :name => 'filename', :class => 'FileSelector' }
+        %select{ :onchange => 'this.form.submit()', :name => 'filename', :id => 'FileSelector' }
           - @@filenames.each do |fn|
             - if fn == @filename
               %option{ :value => fn, :selected => 'selected'}#{fn}
             - else
               %option{ :value => fn}#{fn}
-      %div{:class => 'FileLabel' }
+      %div{:id => 'FileLabel' }
         Файл:
 
-      %button{ :class => 'MergeButton', :onclick => 'mergeTableCells();' }
+      %button{ :id => 'MergeButton', :onclick => 'REDIPS.table.merge();' }
         Объединить ячейки
 
-      %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split("h");'}
+      %button{ :id => 'SplitButton', :onclick => 'REDIPS.table.split();' }
         Разбить ячейки по горизонтали
 
-      %form{ :class => 'DownloadForm', :action => '/download', :target => '_blank', :method => 'POST', :id => 'xmldownloadform' }
+      %form{ :id => 'DownloadForm', :action => '/download', :target => '_blank', :method => 'POST', :id => 'xmldownloadform' }
         %input{ :type => 'hidden', :class => 'jsondata', :name => 'jsondata'}
         %input{ :type => 'hidden', :name => 'filename', :value => @filename }
-        %input{ :type => 'submit', :class => 'DownloadButton', :value => 'Скачать XML' }
+        %input{ :type => 'submit', :id => 'DownloadButton', :value => 'Скачать XML' }
             
-      %form{ :class => 'SaveForm', :action => '/save', :method => 'POST', :id => 'xmlsaveform' }
+      %form{ :id => 'SaveForm', :action => '/save', :method => 'POST', :id => 'xmlsaveform' }
         %input{ :type => 'hidden', :class => 'jsondata', :name => 'jsondata'}
-        %input{ :type => 'text', :name => 'filename', :value => @filename, :class => 'SaveFilename' }
-        %input{ :type => 'submit', :class => 'SaveButton', :value => 'Сохранить как' }
+        %input{ :type => 'text', :name => 'filename', :value => @filename, :id => 'SaveFilename' }
+        %input{ :type => 'submit', :id => 'SaveButton', :value => 'Сохранить как' }
 
-      %form{ :class => 'NewForm', :action => '/new'}
-        %input{ :type => 'submit', :class => 'NewButton', :value => 'Создать новое расписание' }
+      %form{ :id => 'NewForm', :action => '/new'}
+        %input{ :type => 'submit', :id => 'NewButton', :value => 'Создать новое расписание' }
 
       %form{ :id => 'NewFromIdForm' }
         %label{ :id => 'courseIdsLabel' }
@@ -165,21 +165,21 @@
         %select{ :onchange => 'createNewLessonFromId()', :id => 'courseIds' }
 
     %div{ :id => 'drag' }
-      %table{ :id => 'helpertable', :class => 'HelperTable' }
+      %table{ :id => 'helpertable' }
         %tbody
           %tr
             %td{ :style => 'height: 62px', :align => 'center', :id => 'newlesson', :class => 'mark'}
               Нажмите, чтобы создать новую пару
 
-      %div{ :class => 'StackTableDiv' }
-        %table{ :id => 'stacktable', :class => 'StackTable', :border => '1px' }
+      %div{ :id => 'StackTableDiv' }
+        %table{ :id => 'stacktable', :border => '1px' }
           %tbody
             - 12.times do
               %tr
                 %td{ :style => 'height: 64px', :align => 'center' }
 
       %div{ :class => 'empty'}
-      %table{ :id => 'timetable', :class => 'TimeTable', :border => '1px' }
+      %table{ :id => 'timetable', :border => '1px' }
         %tbody
           %tr
             %th{ :width => '2%', :class => 'mark', :bgcolor => '#ddddff' }

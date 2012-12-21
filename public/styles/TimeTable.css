@@ -1,11 +1,11 @@
-.YearSelector {
+#year {
     position: fixed;
     left: 80px;
     top: 5px;
     width: 100px;
 }
 
-.YearLabel {
+#YearLabel {
     position: fixed;
     top: 8px;
     left: 5px;
@@ -13,14 +13,14 @@
     text-align: left;
 }
 
-.SemesterSelector {
+#sem {
     position: fixed;
     top: 30px;
     left: 80px;
     width: 100px;
 }
 
-.SemesterLabel {
+#SemesterLabel {
     position: fixed;
     top: 32px;
     left: 5px;
@@ -28,14 +28,14 @@
     text-align: left;
 }
 
-.FileSelector {
+#FileSelector {
     position: fixed;
     top: 55px;
     left: 80px;
     width: 104px;
 }
 
-.FileLabel {
+#FileLabel {
     position: fixed;
     top: 55px;
     left: 5px;
@@ -44,7 +44,7 @@
 }
 
 
-.MergeButton {
+#MergeButton {
     position: fixed;
     top: 5px;
     left: 200px;
@@ -52,7 +52,7 @@
     height: 70px;
 }
 
-.SplitButton {
+#SplitButton {
     position: fixed;
     top: 5px;
     left: 310px;
@@ -60,7 +60,7 @@
     height: 70px;
 }
 
-.HelperTable {
+#helpertable {
     position: fixed;
     top: 5px;
     width: 250px;
@@ -79,7 +79,7 @@
     border: 1px solid black;
 }
 
-.SaveForm {
+#SaveForm {
     position: fixed;
     top: 395px;
     right: 5px;
@@ -91,7 +91,7 @@
     width: 100%;
 }
 
-.DownloadButton {
+#DownloadButton {
     position: fixed;
     left: 680px;
     top: 52px;
@@ -99,21 +99,21 @@
     z-index: 1;
 }
 
-.SaveButton {
+#SaveButton {
     position: fixed;
     top: 2px;
     left: 680px;
     width: 120px;
 }
 
-.SaveFilename {
+#SaveFilename {
     position: fixed;
     top: 2px;
     left: 810px;
     width: 150px;
 }
 
-.NewButton {
+#NewButton {
     position: fixed;
     top: 27px;
     left: 680px;
@@ -121,21 +121,21 @@
 }
 
 
-.DownloadForm {
+#DownloadForm {
     position: fixed;
     top: 395px;
     right: 5px;
     width: 250px
 }
 
-table.TimeTable {
+#timetable {
     width: 74%;
     border-collapse: collapse;
     left: 0.3%;
     position: relative;
 }
 
-.StackTableDiv {
+#StackTableDiv {
     position: fixed;
     top: 88px;
     bottom: 0px;
@@ -146,7 +146,7 @@ table.TimeTable {
 }
 
 
-table.StackTable {
+#stacktable {
     width: 100%;
     border-collapse: collapse;
 }
@@ -167,7 +167,7 @@ table.StackTable {
     border-radius: 4px; /* Opera, Chrome */
 }
 
-.uppanel {
+#uppanel {
     top: -1px;
     left: -1px;
     height: 80px;
