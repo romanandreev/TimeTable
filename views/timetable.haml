@@ -16,6 +16,11 @@
     %body
     :javascript
 
+      function mergeTableCells() { 
+        REDIPS.table.merge('v', false);
+        REDIPS.table.merge();
+      }
+
       function makeEditable(classname) {
 
         var formStyle = 'display: inline-block; width:100%';
@@ -135,11 +140,11 @@
       %div{:class => 'FileLabel' }
         Файл:
 
-      %button{ :class => 'MergeButton', :onclick => 'REDIPS.table.merge();' }
+      %button{ :class => 'MergeButton', :onclick => 'mergeTableCells();' }
         Объединить ячейки
 
-      %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split();' }
-        Разбить ячейки
+      %button{ :class => 'SplitButton', :onclick => 'REDIPS.table.split("h");'}
+        Разбить ячейки по горизонтали
 
       %form{ :class => 'DownloadForm', :action => '/download', :target => '_blank', :method => 'POST', :id => 'xmldownloadform' }
         %input{ :type => 'hidden', :class => 'jsondata', :name => 'jsondata'}
