@@ -113,18 +113,23 @@ post '/renderjson' do
   end
 end
 
+def jsonToXml(statmod, json)
+  timetable = statmod.jsonToTimetable json
+
+  builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8')
+  pi = Nokogiri::XML::ProcessingInstruction.new(builder.doc, 
+                                               'xml-stylesheet',
+                                               'type="text/xsl" href="timetable.xsl"')
+  timetable.to_xml(builder)
+  builder.doc.root.add_previous_sibling pi
+  builder.to_xml(:indent => 4)
+end
+
 post '/save' do
   json = JSON.parse params[:jsondata] 
   begin
-    timetable = statmod.jsonToTimetable json
     fn = params[:filename]
-    builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8')
-    pi = Nokogiri::XML::ProcessingInstruction.new(builder.doc, 
-                                                 'xml-stylesheet',
-                                                 'type="text/xsl" href="timetable.xsl"')
-    timetable.to_xml(builder)
-    builder.doc.root.add_previous_sibling pi
-    File.write(TABLE_DIR + fn, builder.to_xml(:indent => 4))
+    File.write(TABLE_DIR + fn, jsonToXml(statmod, json))
     @@filenames << fn
     redirect "/edit/#{CGI::escape fn}"
   rescue
@@ -135,7 +140,8 @@ end
 post '/download' do
   content_type 'application/octet-stream'
   attachment params[:filename]
-  params[:xmldata]
+  json = JSON.parse params[:jsondata]
+  jsonToXml statmod, json
 end
 
 get '/newlesson' do

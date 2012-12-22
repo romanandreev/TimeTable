@@ -1,62 +1,62 @@
 window.getTimeTableJson = ->
     getAttr = (lesson, attr) -> $(lesson.cell).find(attr).text().trim()
 
-    getLessonJson = (lesson) -> 
-
-        json = 
-            course:
-                name: getAttr lesson, '.name'
-                prof: getAttr lesson, '.prof'
-            location: getAttr lesson, '.loc'
-
-        id = $(lesson.cell).find('.lessonid')[0]
-        if id?
-          # still send prof and name to facilitate server job
-          json.course.id = $(id).attr('value')
-
-        checkboxes = $(lesson.cell).find "input[type=checkbox]"
-        fortnightly = 0
-        if $(checkboxes[0]).attr('checked') == 'checked'
-            fortnightly += 1
-        if $(checkboxes[1]).attr('checked') == 'checked'
-            fortnightly += 2
-
-        if 1 <= fortnightly <= 2
-            json.course.fortnightly = fortnightly 
-
-        spec:   lesson.spec
-        lesson: json
- 
     getRowJson = (row) ->
-        cols = $(row).find 'td.lesson'
+
+        row = $(row)
+        top = row.hasClass('top')
+            
+        cols = row.find 'td.lesson'
         all_lessons = []
         if cols.length == 1
             all_lessons = [{cell: cols[0], spec: 'all'}]
         else
-            all_lessons = [{cell: cols[0], spec: 'sm'}, 
-                           {cell: cols[1], spec: 'mm'}, 
-                           {cell: cols[2], spec: 'sa'}]
+            all_lessons = [{cell: cols[0], spec: 'sa'}, 
+                           {cell: cols[1], spec: 'sm'}, 
+                           {cell: cols[2], spec: 'mm'}]
 
-        lessons = (l for l in all_lessons when $(l.cell).text().trim().length > 0)
-        return null if lessons.length == 0
+        getLessonJson = (lesson) -> 
 
-        result = 
-            no: $(row).find("th").text().trim()
-            lessons: {}
-        for json in (getLessonJson lesson for lesson in lessons)
-            result.lessons[json.spec] = json.lesson
-       
-        result
+            json = 
+                spec:     lesson.spec
+                location: getAttr lesson, '.loc'
+                course:   {}
 
-    getWeekdayJson = (weekday) -> 
+            cell = $(lesson.cell)
+
+            id = cell.find('.lessonid')[0]
+            if id?
+              json.course.id = $(id).attr('value')
+            else
+              json.course.name = getAttr lesson, '.name'
+              json.course.prof = getAttr lesson, '.prof'
+
+            rowspan = parseInt(cell.attr('rowspan'))
+
+            if not top
+                json.fortnightly = 2
+            else if rowspan == 1
+                json.fortnightly = 1
+  
+            json
+
+        (getLessonJson l for l in all_lessons when $(l.cell).text().trim().length > 0)
+
+    getWeekday = (weekday) -> 
         rows = {}
-        for json in (getRowJson row for row in $(".#{weekday}"))
-            rows[json.no] = json.lessons if json?
-        rows
+        top_rows = $(".#{weekday}.top")
+        btm_rows = $(".#{weekday}.btm")
+
+        getLessons = (index) ->
+            arr1 = getRowJson top_rows[index]
+            arr2 = getRowJson btm_rows[index]
+            arr1.concat arr2
+
+        (getLessons i for i in [0 .. 4])
 
     weekdays = {}
     for wd in ['mon', 'tue', 'wed', 'thu', 'fri', 'sat']
-        weekdays[wd] = getWeekdayJson wd
+        weekdays[wd] = getWeekday wd
 
     weekdays: weekdays
     year:     $("#year")[0].value

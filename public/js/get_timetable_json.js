@@ -2,42 +2,15 @@
 (function() {
 
   window.getTimeTableJson = function() {
-    var getAttr, getLessonJson, getRowJson, getWeekdayJson, wd, weekdays, _i, _len, _ref;
+    var getAttr, getRowJson, getWeekday, wd, weekdays, _i, _len, _ref;
     getAttr = function(lesson, attr) {
       return $(lesson.cell).find(attr).text().trim();
     };
-    getLessonJson = function(lesson) {
-      var checkboxes, fortnightly, id, json;
-      json = {
-        course: {
-          name: getAttr(lesson, '.name'),
-          prof: getAttr(lesson, '.prof')
-        },
-        location: getAttr(lesson, '.loc')
-      };
-      id = $(lesson.cell).find('.lessonid')[0];
-      if (id != null) {
-        json.course.id = $(id).attr('value');
-      }
-      checkboxes = $(lesson.cell).find("input[type=checkbox]");
-      fortnightly = 0;
-      if ($(checkboxes[0]).attr('checked') === 'checked') {
-        fortnightly += 1;
-      }
-      if ($(checkboxes[1]).attr('checked') === 'checked') {
-        fortnightly += 2;
-      }
-      if ((1 <= fortnightly && fortnightly <= 2)) {
-        json.course.fortnightly = fortnightly;
-      }
-      return {
-        spec: lesson.spec,
-        lesson: json
-      };
-    };
     getRowJson = function(row) {
-      var all_lessons, cols, json, l, lesson, lessons, result, _i, _len, _ref;
-      cols = $(row).find('td.lesson');
+      var all_lessons, cols, getLessonJson, l, top, _i, _len, _results;
+      row = $(row);
+      top = row.hasClass('top');
+      cols = row.find('td.lesson');
       all_lessons = [];
       if (cols.length === 1) {
         all_lessons = [
@@ -50,75 +23,70 @@
         all_lessons = [
           {
             cell: cols[0],
-            spec: 'sm'
+            spec: 'sa'
           }, {
             cell: cols[1],
-            spec: 'mm'
+            spec: 'sm'
           }, {
             cell: cols[2],
-            spec: 'sa'
+            spec: 'mm'
           }
         ];
       }
-      lessons = (function() {
-        var _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = all_lessons.length; _i < _len; _i++) {
-          l = all_lessons[_i];
-          if ($(l.cell).text().trim().length > 0) {
-            _results.push(l);
-          }
+      getLessonJson = function(lesson) {
+        var cell, id, json, rowspan;
+        json = {
+          spec: lesson.spec,
+          location: getAttr(lesson, '.loc'),
+          course: {}
+        };
+        cell = $(lesson.cell);
+        id = cell.find('.lessonid')[0];
+        if (id != null) {
+          json.course.id = $(id).attr('value');
+        } else {
+          json.course.name = getAttr(lesson, '.name');
+          json.course.prof = getAttr(lesson, '.prof');
         }
-        return _results;
-      })();
-      if (lessons.length === 0) {
-        return null;
-      }
-      result = {
-        no: $(row).find("th").text().trim(),
-        lessons: {}
+        rowspan = parseInt(cell.attr('rowspan'));
+        if (!top) {
+          json.fortnightly = 2;
+        } else if (rowspan === 1) {
+          json.fortnightly = 1;
+        }
+        return json;
       };
-      _ref = (function() {
-        var _j, _len, _results;
-        _results = [];
-        for (_j = 0, _len = lessons.length; _j < _len; _j++) {
-          lesson = lessons[_j];
-          _results.push(getLessonJson(lesson));
+      _results = [];
+      for (_i = 0, _len = all_lessons.length; _i < _len; _i++) {
+        l = all_lessons[_i];
+        if ($(l.cell).text().trim().length > 0) {
+          _results.push(getLessonJson(l));
         }
-        return _results;
-      })();
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        json = _ref[_i];
-        result.lessons[json.spec] = json.lesson;
       }
-      return result;
+      return _results;
     };
-    getWeekdayJson = function(weekday) {
-      var json, row, rows, _i, _len, _ref;
+    getWeekday = function(weekday) {
+      var btm_rows, getLessons, i, rows, top_rows, _i, _results;
       rows = {};
-      _ref = (function() {
-        var _j, _len, _ref, _results;
-        _ref = $("." + weekday);
-        _results = [];
-        for (_j = 0, _len = _ref.length; _j < _len; _j++) {
-          row = _ref[_j];
-          _results.push(getRowJson(row));
-        }
-        return _results;
-      })();
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        json = _ref[_i];
-        if (json != null) {
-          rows[json.no] = json.lessons;
-        }
+      top_rows = $("." + weekday + ".top");
+      btm_rows = $("." + weekday + ".btm");
+      getLessons = function(index) {
+        var arr1, arr2;
+        arr1 = getRowJson(top_rows[index]);
+        arr2 = getRowJson(btm_rows[index]);
+        return arr1.concat(arr2);
+      };
+      _results = [];
+      for (i = _i = 0; _i <= 4; i = ++_i) {
+        _results.push(getLessons(i));
       }
-      return rows;
+      return _results;
     };
     weekdays = {};
     _ref = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       wd = _ref[_i];
-      weekdays[wd] = getWeekdayJson(wd);
+      weekdays[wd] = getWeekday(wd);
     }
     return {
       weekdays: weekdays,

@@ -58,19 +58,27 @@ class Statmod
       wd_table = WeekdayTable.new
       wd_table.id = id
       wd_table.double_classes = []
-      classes.each do |index, lessons|
+      5.times do |index|
+        lessons = classes[index]
         double_class = DoubleClass.new
-        double_class.index = index.to_i
+        double_class.index = index.to_i + 1
         double_class.lessons = []
-        lessons.each do |spec, lesson_json|
+        lessons.each do |lesson_json|
           lesson = Lesson.new
-          lesson.spec = spec
+          lesson.spec = lesson_json['spec']
+          lesson.type = if lesson.spec == 'all' then 'dep' else 'chair' end
           lesson.location = lesson_json['location']
-          lesson.fortnightly = lesson_json['fortnightly']
+          fn = lesson_json['fortnightly']
+          unless fn.nil?
+            lesson.fortnightly = Fortnightly.new
+            lesson.fortnightly.type = fn
+          end
           lesson.course = Course.new
-          lesson.course.name = lesson_json['course']['name']
-          lesson.course.prof = lesson_json['course']['prof']
           lesson.course.id = lesson_json['course']['id']
+          if lesson.course.id.nil?
+            lesson.course.name = lesson_json['course']['name']
+            lesson.course.prof = lesson_json['course']['prof']
+          end
           double_class.lessons << lesson
         end
         wd_table.double_classes << double_class
