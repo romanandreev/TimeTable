@@ -1,0 +1,22 @@
+%table{ :class => 'timetablerow', :border => '1px' }
+  %tbody
+    %tr
+      %th{ :class => 'mark', :bgcolor => '#ffffcd', :class => 'lessonnum' }
+        %input{ :type => 'button', :class => 'ClearDayButton', :style => 'cursor:pointer',
+                :onclick => "$('tr.#{weekday.id}').find('td').html('')" }
+      %th{ :colspan => 3, :bgcolor => '#ffffcd', :class => 'mark' }
+        = weekday.name
+- 1.upto(5).each do |index|
+  %table{ :class => 'timetablerow', :border => '1px' }
+    %tbody
+      %tr{ :class => [weekday.id, 'top'], :style => 'height: 50px' }
+        %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :class => 'lessonnum', :rowspan => 2}
+          %div{ :class => 'row' }
+            = index
+        
+        - double_class = weekday.getDoubleClass(index)
+        = haml :top_halfrow, :locals => { :lessons => double_class.topLessons }
+      %tr{ :class => [weekday.id, 'btm'], :style => 'height: 50px' }
+        - specs_to_skip = double_class.topLessons.select{|k,v| v.denominator? }.keys
+        = haml :bottom_halfrow, :locals => { :lessons => double_class.bottomLessons,
+                                             :skip => Set.new(specs_to_skip) }

@@ -7,7 +7,7 @@ require 'haml'
 require 'cgi'
 require 'set'
 
-set :environment, :production
+set :environment, :development
 
 before do
   content_type :html, 'charset' => 'utf-8'

@@ -105,6 +105,10 @@
     width: 100%;
 }
 
+th.lessonnum {
+    width: 2%;
+}
+
 #DownloadButton {
     position: fixed;
     left: 730px;
@@ -142,11 +146,12 @@
     width: 250px
 }
 
-#timetable {
+.timetablerow {
     width: 74%;
     border-collapse: collapse;
     left: 0.3%;
     position: relative;
+    table-layout: fixed;
 }
 
 #StackTableDiv {

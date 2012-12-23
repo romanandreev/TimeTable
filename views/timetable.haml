@@ -83,7 +83,7 @@
         // REDIPS.drag.rowDropMode = 'switch';
         REDIPS.table.mark_nonempty = false;
         REDIPS.table.color.cell = '#AADDAA';
-        REDIPS.table.onmousedown('timetable', true);
+        REDIPS.table.onmousedown('timetablerow', true, 'classname');
 
         $.editable.addInputType('autocomplete', {
           element: $.editable.types.text.element,
@@ -183,31 +183,13 @@
                 %td{ :style => 'height: 64px', :align => 'center' }
 
       %div{ :class => 'empty'}
-      %table{ :id => 'timetable', :border => '1px' }
+      %table{ :class => 'timetablerow', :border => '1px' }
         %tbody
           %tr
-            %th{ :width => '2%', :class => 'mark', :bgcolor => '#ddddff' }
+            %th{ :width => '2%', :class => 'mark', :bgcolor => '#d8bfd8' }
             - @@specnames.each do |name|
-              %td{ :bgcolor => '#ddddff', :align => 'center', :width => '33%', :class => 'mark' }
-                = name
-          - @timetable.weekday_tables.each do |weekday|
-            %tr
-              %th{ :class => 'mark', :bgcolor => '#ffffcd' }
-                %input{ :type => 'button', :class => 'ClearDayButton', :style => 'cursor:pointer',
-                        :onclick => "$('tr.#{weekday.id}').find('td').html('')" }
-
-              %th{ :colspan => 3, :bgcolor => '#ffffcd', :class => 'mark' }
-                = weekday.name
-
-            - 1.upto(5).each do |index|
-              %tr{ :class => [weekday.id, 'top'], :style => 'height: 50px' }
-                %th{ :bgcolor => '#f6956f', :style => 'height: 64px', :rowspan => 2}
-                  %div{ :class => 'row' }
-                    = index
-                
-                - double_class = weekday.getDoubleClass(index)
-                = haml :top_halfrow, :locals => { :lessons => double_class.topLessons }
-              %tr{ :class => [weekday.id, 'btm'], :style => 'height: 50px' }
-                - specs_to_skip = double_class.topLessons.select{|k,v| v.denominator? }.keys
-                = haml :bottom_halfrow, :locals => { :lessons => double_class.bottomLessons,
-                                                     :skip => Set.new(specs_to_skip) }
+              %td{ :bgcolor => '#d8bfd8', :align => 'center', :class => 'mark' }
+                %b
+                  = name
+      - @timetable.weekday_tables.each do |weekday|
+        = haml :weekday, :locals => { :weekday => weekday }
