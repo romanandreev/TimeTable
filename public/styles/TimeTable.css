@@ -109,6 +109,13 @@ th.lessonnum {
     width: 2%;
 }
 
+td.lesson {
+    padding-right: 4px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+}
+
 #DownloadButton {
     position: fixed;
     left: 730px;
