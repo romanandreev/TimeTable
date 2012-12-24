@@ -27,7 +27,7 @@
         var inputHeight = '14px';
         var inputWidth = '80%';
 
-        $('.' + classname + '.loc').editable(function (value, settings) {
+        $('div.' + classname + '.loc').editable(function (value, settings) {
           return(value);
         }, { 
              style: formStyle,
@@ -37,7 +37,7 @@
              placeholder: ''
            });
 
-        $('.' + classname + '.prof').editable(function (value, settings) {
+        $('div.' + classname + '.prof').editable(function (value, settings) {
           return(value);
         }, { 
              type: 'autocomplete',
@@ -51,7 +51,7 @@
              }
            });
 
-        $('.' + classname + '.name').editable(function (value, settings) {
+        $('div.' + classname + '.name').editable(function (value, settings) {
           return(value);
         }, {
           type: 'autocomplete',
@@ -69,9 +69,17 @@
       courses = #{@@courselist_json};
       course_ids = #{@@courseidlist_json};
 
+      function updateCourseIdentifiers() {
+        var h = course_ids[$("#sem").attr('value')];
+        $('#courseIds').html(h);
+        $('select.courseIdSelect').html(h);
+        $('#courseIds').prop('selectedIndex', -1);
+        $('select.courseIdSelect').prop('selectedIndex', -1);
+      }
+
       $(document).ready(function () {
 
-        $(".DeleteButton").click(function() {
+        $("input.DeleteButton").click(function() {
           $(this).parents(".drag").remove();
         });
 
@@ -109,17 +117,11 @@
 
         $('.FileSelector').prop('selectedIndex', -1);
 
-
-        function updateCourseIdentifiers() {
-          $('#courseIds').html(course_ids[$("#sem").attr('value')]);
-        }
-
         $('#sem').change(function() {
           updateCourseIdentifiers(); 
         });
 
         updateCourseIdentifiers();
-        $('#courseIds').prop('selectedIndex', -1);
       });
 
     %div{ :id => 'uppanel'}

@@ -241,3 +241,8 @@ div.fixed {
     width: 400px;
     text-align: left;
 }
+
+select.courseIdSelect {
+    width: 20px;
+    text-align: left;
+}

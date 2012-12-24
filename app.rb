@@ -163,7 +163,23 @@ get '/newlesson/:semester/:courseid' do |semester, id|
     lesson.course.name = courseinfo.name
     lesson.course.prof = courseinfo.instructor.name
   end
-  @newlessonresponse ||= haml :newlesson, :locals => { :lesson => lesson }
+  haml :newlesson, :locals => { :lesson => lesson }
+end
+
+get '/replacelesson/:semester/:courseid' do |semester, id|
+  rs = params[:rowspan]
+  loc = params[:location]
+
+  lesson = Lesson.new
+  lesson.course = Course.new
+  lesson.course.id = id
+  courseinfo = statmod.getCourseInfo semester, id
+  unless course.nil?
+    lesson.course.name = courseinfo.name
+    lesson.course.prof = courseinfo.instructor.name
+  end
+  lesson.location = loc
+  haml :replacelesson, :locals => { :lesson => lesson, :rowspan => rs }
 end
 
 post '/loadfile' do

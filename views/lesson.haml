@@ -1,5 +1,8 @@
 - rowclass ||= 'editable'
 %div{:style => 'display: table; width: 100%; height: 100%'}
+  - unless lesson.course.id.nil?
+    %div{ :style => 'display: table-cell; width: 20px; height: 100%; padding-left:2px; padding-top:2px; vertical-align: top;', :align => 'left' }
+      %select{ :onchange => 'replaceIdLesson(this)', :class => 'courseIdSelect'}
   %div{ :style => 'display: table-cell; width: 20px; height: 100%; padding-left:2px; padding-bottom:2px; vertical-align: bottom;', :align => 'left' }
     %input{ :type => 'button', :class => 'DeleteButton', :style => 'cursor: pointer' }
 
