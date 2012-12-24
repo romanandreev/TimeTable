@@ -146,9 +146,9 @@
       %label{ :id => 'SplitButtonsLabel' }
         Разбить ячейки
       %button{ :id => 'SplitButtonH', :onclick => 'REDIPS.table.split("h");' }
-        По горизонтали
+        По направлениям
       %button{ :id => 'SplitButtonV', :onclick => 'REDIPS.table.split("v");' }
-        По вертикали
+        По четности недели
 
       %form{ :id => 'DownloadForm', :action => '/download', :target => '_blank', :method => 'POST', :id => 'xmldownloadform' }
         %input{ :type => 'hidden', :class => 'jsondata', :name => 'jsondata'}
