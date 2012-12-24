@@ -15,8 +15,8 @@
             = index
         
         - double_class = weekday.getDoubleClass(index)
-        = haml :top_halfrow, :locals => { :lessons => double_class.topLessons }
+        = haml :top_halfrow, :locals => { :lessons => double_class.topLessons,
+                                          :rs1 => Set.new(double_class.bottomLessons.keys) }
       %tr{ :class => [weekday.id, 'btm'], :style => 'height: 50px' }
-        - specs_to_skip = double_class.topLessons.select{|k,v| v.denominator? }.keys
         = haml :bottom_halfrow, :locals => { :lessons => double_class.bottomLessons,
-                                             :skip => Set.new(specs_to_skip) }
+                                             :empty => Set.new(double_class.topLessons.select{|k,v| not v.denominator?}.keys) }

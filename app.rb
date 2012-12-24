@@ -17,7 +17,13 @@ end
 @@specnames = ['САПР', 'СМ', 'ММ']
 
 def rowSpan(l)
-  if l.nil? or not l.fortnightly.nil? then 1 else 2 end
+  if l.nil?
+    2
+  elsif l.fortnightly.nil?
+    2
+  else
+    1
+  end
 end
 
 require_relative 'lib/statmod.rb'
