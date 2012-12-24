@@ -35,7 +35,7 @@ function createNewLesson() {
 }
 
 function createNewLessonFromId() {
-    var id = $($("#courseIds")[0].selectedOptions).attr('value');
+    var id = $("#courseIds").val();
     var semester = $("#sem").attr('value');
 
     replaceNewLessonTdWith($.get("/newlesson/" + semester + "/" + id));
@@ -62,7 +62,7 @@ function replaceLessonTdWith(td, ajax_request) {
 
 function replaceIdLesson(select) {
     
-    var id = $($(select)[0].selectedOptions).attr('value');
+    var id = $(select).val();
     var semester = $("#sem").attr('value');
     var td = $(select).parents('td');
     var rs = td.attr('rowspan');
