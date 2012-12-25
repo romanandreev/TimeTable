@@ -107,6 +107,7 @@
 
 th.lessonnum {
     width: 2%;
+    vertical-align: bottom;
 }
 
 td.lesson {
