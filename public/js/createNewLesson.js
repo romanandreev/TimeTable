@@ -30,7 +30,7 @@ function createNewLesson() {
 }
 
 function createNewLessonFromId() {
-    id = $($("#courseIds")[0].selectedOptions).attr('value');
+    id = $("#courseIds").val();
     semester = $("#sem").attr('value');
 
     replaceNewLessonTdWith($.get("/newlesson/" + semester + "/" + id));
