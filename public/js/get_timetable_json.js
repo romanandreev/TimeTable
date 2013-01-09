@@ -10,7 +10,7 @@
       var all_lessons, cols, getLessonJson, l, top, _i, _len, _results;
       row = $(row);
       top = row.hasClass('top');
-      cols = row.find('td.lesson');
+      cols = row.find('td');
       all_lessons = [];
       if (cols.length === 1) {
         all_lessons = [

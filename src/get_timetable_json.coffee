@@ -6,7 +6,7 @@ window.getTimeTableJson = ->
         row = $(row)
         top = row.hasClass('top')
             
-        cols = row.find 'td.lesson'
+        cols = row.find 'td'
         all_lessons = []
         if cols.length == 1
             all_lessons = [{cell: cols[0], spec: 'all'}]
