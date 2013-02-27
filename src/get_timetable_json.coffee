@@ -1,19 +1,34 @@
 window.getTimeTableJson = ->
     getAttr = (lesson, attr) -> $(lesson.cell).find(attr).text().trim()
 
-    getRowJson = (row) ->
+    getRowJson = (top, bottom) ->
 
-        row = $(row)
-        top = row.hasClass('top')
-            
-        cols = row.find 'td'
+        top_cells = $(top).find 'td'
         all_lessons = []
-        if cols.length == 1
-            all_lessons = [{cell: cols[0], spec: 'all'}]
+        if top_cells.length == 1
+            all_lessons = [{cell: top_cells[0], spec: 'all'}]
         else
-            all_lessons = [{cell: cols[0], spec: 'sa'}, 
-                           {cell: cols[1], spec: 'sm'}, 
-                           {cell: cols[2], spec: 'mm'}]
+            all_lessons = [{cell: top_cells[0], spec: 'sa'}, 
+                           {cell: top_cells[1], spec: 'sm'}, 
+                           {cell: top_cells[2], spec: 'mm'}]
+
+        for i in [0 ... all_lessons.length]
+            lesson = all_lessons[i]
+            if $(top_cells[i]).attr('rowspan') != '2'
+                lesson.fortnightly = 1
+                all_lessons[i] = lesson
+        btm_cells = $(bottom).find 'td'
+
+        if btm_cells.length > 0
+            if btm_cells.length == 1 and $(btm_cells[0]).attr('colspan') == '3'
+                all_lessons.push {cell: btm_cells[0], spec: 'all', fortnightly: 2}
+            else
+                specs = ['sa', 'sm', 'mm']
+                j = 0
+                for i in [0 .. 2]
+                    if $(top_cells[i]).attr('rowspan') != '2'
+                        all_lessons.push {cell: btm_cells[j], spec: specs[i], fortnightly: 2}
+                        j += 1
 
         getLessonJson = (lesson) -> 
 
@@ -33,10 +48,8 @@ window.getTimeTableJson = ->
 
             rowspan = parseInt(cell.attr('rowspan'))
 
-            if not top
-                json.fortnightly = 2
-            else if rowspan == 1
-                json.fortnightly = 1
+            if lesson.fortnightly
+                json.fortnightly = lesson.fortnightly
   
             json
 
@@ -48,9 +61,7 @@ window.getTimeTableJson = ->
         btm_rows = $(".#{weekday}.btm")
 
         getLessons = (index) ->
-            arr1 = getRowJson top_rows[index]
-            arr2 = getRowJson btm_rows[index]
-            arr1.concat arr2
+            getRowJson top_rows[index], btm_rows[index]
 
         (getLessons i for i in [0 .. 4])
 
