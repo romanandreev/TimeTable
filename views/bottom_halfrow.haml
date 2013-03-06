@@ -1,6 +1,6 @@
 - dep_lesson = lessons['all']
 - if dep_lesson.nil?
-  - @@specs.each do |spec|
+  - @specs.each do |spec|
     - lesson = lessons[spec]
     - if not lesson.nil?
       %td{ :class => 'lesson' }
