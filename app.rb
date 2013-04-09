@@ -29,26 +29,38 @@ class StatmodWebApp < Sinatra::Base
 
     TABLE_DIR = File.dirname(__FILE__) + '/data/tables/'
 
-    timetable3 = @@statmod.getTimeTable(TABLE_DIR + '3course.xml')
-    timetable4 = @@statmod.getTimeTable(TABLE_DIR + '4course.xml')
-    timetable5 = @@statmod.getTimeTable(TABLE_DIR + '5course.xml')
+    @@timetable3 = @@statmod.getTimeTable(TABLE_DIR + '3course.xml')
+    @@timetable4 = @@statmod.getTimeTable(TABLE_DIR + '4course.xml')
+    @@timetable5 = @@statmod.getTimeTable(TABLE_DIR + '5course.xml')
 
-    newlesson = Lesson.new
+    @@newlesson = Lesson.new
     course = Course.new
     course.prof = 'Преподаватель'
     course.name = 'Название предмета'
-    newlesson.fortnightly = nil
-    newlesson.course = course
-    newlesson.location = 'Аудитория'
+    @@newlesson.fortnightly = nil
+    @@newlesson.course = course
+    @@newlesson.location = 'Аудитория'
 
     all_courses = @@statmod.getAllCourses
 
     # map: semester -> course ids
-    courseidlist = all_courses.map{|k, v| {k => v.keys}}.reduce(:merge)
-
+    courseidlist = {}
+    all_courses.each do |semester, courses|
+      courseidlist[semester] = []
+      courses.each do |id, info|
+        if info.parts and not info.parts.empty? then
+          info.parts.each do |part|
+            courseidlist[semester] << idEncode(id, part.type)
+          end
+        else
+          courseidlist[semester] << id
+        end
+      end
+    end
+    
     # map: semester -> course names
     courselist = @@statmod.getAllCourses.map{|k, v| {k => v.values.map(&:name)}}.reduce(:merge)
-    [timetable3, timetable4, timetable5].each do |timetable|
+    [@@timetable3, @@timetable4, @@timetable5].each do |timetable|
       courselist[timetable.semester] += timetable.courseNames
       courselist[timetable.semester] << ''
       courselist[timetable.semester].sort!
@@ -59,16 +71,14 @@ class StatmodWebApp < Sinatra::Base
     @@courseidlist_json = courseidlist.map{|k, v| {k => optionsToHtml(v, all_courses[k])}}.reduce(:merge).to_json
     @@courselist_json = courselist.to_json
     @@stafflist_json = stafflist.persons.map(&:name).to_json
-
-    Dir.chdir TABLE_DIR do
-      @@filenames = Set.new(Dir["*.xml"])
-    end
   end
 
   before do
     content_type :html, 'charset' => 'utf-8'
     @buffer = session[:buffer]
-    @filenames = @@filenames
+    Dir.chdir TABLE_DIR do
+      @filenames = Dir["*.xml"].sort
+    end
     @specs = @@specs
     @specnames = @@specnames
     @courseidlist_json = @@courseidlist_json
@@ -92,19 +102,19 @@ class StatmodWebApp < Sinatra::Base
 
   get '/3course' do
     @filename = '3course.xml'
-    @timetable = timetable3
+    @timetable = @@timetable3
     haml :timetable
   end
 
   get '/4course' do
     @filename = '4course.xml'
-    @timetable = timetable4
+    @timetable = @@timetable4
     haml :timetable
   end
 
   get '/5course' do
     @filename = '5course.xml'
-    @timetable = timetable5
+    @timetable = @@timetable5
     haml :timetable
   end
 
@@ -153,7 +163,6 @@ class StatmodWebApp < Sinatra::Base
     begin
       fn = params[:filename]
       File.write(TABLE_DIR + fn, jsonToXml(@@statmod, json['timetable']))
-      @@filenames << fn
       redirect "/edit/#{CGI::escape fn}"
     rescue
       "Ошибка сохранения XML-файла"
@@ -165,21 +174,28 @@ class StatmodWebApp < Sinatra::Base
     attachment params[:filename]
     json = JSON.parse params[:jsondata]
     session[:buffer] = json['buffer']
-    jsonToXml statmod, json['timetable']
+    jsonToXml @@statmod, json['timetable']
   end
 
   get '/newlesson' do
-    @newlessonresponse ||= haml :newlesson, :locals => { :lesson => newlesson }
+    @newlessonresponse ||= haml :newlesson, :locals => { :lesson => @@newlesson }
   end
 
   get '/newlesson/:semester/:courseid' do |semester, id|
+    id, part = idDecode id
+    
     lesson = Lesson.new
     lesson.course = Course.new
     lesson.course.id = id
-    courseinfo = statmod.getCourseInfo semester, id
-    unless course.nil?
+    courseinfo = @@statmod.getCourseInfo semester, id
+    unless courseinfo.nil?
       lesson.course.name = courseinfo.name
-      lesson.course.prof = courseinfo.instructor.name
+      if part
+        lesson.course.prof = courseinfo.getInstructor(part).name
+        lesson.course.part = part
+      else
+        lesson.course.prof = courseinfo.instructor.name
+      end
     end
     @newlessonresponse ||= haml :newlesson, :locals => { :lesson => lesson }
   end

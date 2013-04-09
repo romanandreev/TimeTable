@@ -25,6 +25,14 @@ class Statmod
         id = course.instructor.id 
         next if @staff[id].nil?
         course.instructor = @staff[id]
+
+        if course.parts
+          course.parts.each do |part|
+            id = part.instructor.id
+            next if @staff[id].nil?
+            part.instructor = @staff[id]
+          end
+        end
       end
     end
   end
@@ -73,12 +81,15 @@ class Statmod
             lesson.fortnightly = Fortnightly.new
             lesson.fortnightly.type = fn
           end
+          
           lesson.course = Course.new
           lesson.course.id = lesson_json['course']['id']
+          lesson.course.part = lesson_json['course']['part']
           if lesson.course.id.nil?
             lesson.course.name = lesson_json['course']['name']
             lesson.course.prof = lesson_json['course']['prof']
           end
+          
           double_class.lessons << lesson
         end
         wd_table.double_classes << double_class

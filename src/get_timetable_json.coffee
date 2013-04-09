@@ -45,6 +45,10 @@ window.getTimeTableJson = ->
             else
               json.course.name = getAttr lesson, '.name'
               json.course.prof = getAttr lesson, '.prof'
+                
+            part = cell.find('.coursepart')[0]
+            if part?
+              json.course.part = $(part).attr('value')
 
             rowspan = parseInt(cell.attr('rowspan'))
 

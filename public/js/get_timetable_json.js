@@ -62,7 +62,7 @@
         }
       }
       getLessonJson = function(lesson) {
-        var cell, id, json, rowspan;
+        var cell, id, json, part, rowspan;
         json = {
           spec: lesson.spec,
           location: getAttr(lesson, '.loc'),
@@ -75,6 +75,10 @@
         } else {
           json.course.name = getAttr(lesson, '.name');
           json.course.prof = getAttr(lesson, '.prof');
+        }
+        part = cell.find('.coursepart')[0];
+        if (part != null) {
+          json.course.part = $(part).attr('value');
         }
         rowspan = parseInt(cell.attr('rowspan'));
         if (lesson.fortnightly) {
